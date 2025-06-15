@@ -1,0 +1,30 @@
+# Fichiers générés par CMake
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# Fichiers Qt / QMake
+*.autosave
+*.user
+*.user.*
+*.pro.user*
+*.qbs.user*
+*.qmlproject.user*
+
+# Binaires et objets compilés
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.out
+
+# Dossiers cachés
+.cache/
+.idea/
+.vscode/
