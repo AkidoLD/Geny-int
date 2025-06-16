@@ -39,7 +39,7 @@ string const GenyRand::random_geny(vector<generator> &gen_list, size_t gchar_l){
             gen_str += gen_c_p_char();
             break;
         case generator::w_db_char:
-            gen_str += "";
+            gen_str += get_rand_str(gchar_l);
             break;
         default:
             throw invalid_argument("Le un des generateur passe ne parametre est invalide");
@@ -49,41 +49,46 @@ string const GenyRand::random_geny(vector<generator> &gen_list, size_t gchar_l){
     return gen_str;
 }
 
-string GenyRand::generate_secure_passw(
-        const size_t lenght,
-        const bool c_letter,
-        const bool c_int,
-        const bool c_schar,
-        const bool p_char,
-        const bool homogen,
-        const bool w_base
-)
-{
+string GenyRand::generate_secure_passw(const size_t lenght, vector<generator> &generators, const bool homogen){
     //Verification des parametre en entre
     if(lenght == 0) return "";
-    if(!(c_letter || c_int || c_schar))
-        throw invalid_argument("Tout les c_% ne peuvent pas etre a false");
+    if(generators.empty())
+        throw invalid_argument("Le vector de generator ne peut etre vide");
     //
-    /**
-     * 
-     */
+    size_t homo_coef = homogen ? 1 : (size_t) lenght/ generators.size(); //Coefficiant d'homogenehite
+    //
     string gen_passw = "";
-    //Liste des generateur utliser
-    vector<u_short> generator_list;
-    
-    while(gen_passw.length() < lenght){
 
+    while(gen_passw.length() < lenght){
+        gen_passw += random_geny(generators, homo_coef);
     }
+    //
+    return gen_passw;
+}
+
+string GenyRand::generate_unique_uid(
+    const size_t n_bloc,
+    const size_t l_bloc,
+    const char s_bloc,
+    vector<generator> generators,
+    const bool homogen
+)
+{
+    if(!n_bloc || !l_bloc) return "";
+    if(generators.empty())
+        throw invalid_argument("La liste de generateur ne peut etre vide");
+    //
+    
 }
 
 const string GenyRand::get_rand_str(size_t const lenght){
-    if(lenght == 0) return string("");
+    if(lenght == 0) return "";
     unordered_set<string> word_set;
     try{
         word_set = wordbase.get_words_with_length(lenght);
     }catch(range_error &e){
         cerr << e.what() << endl;
-        return string("");
+        return "";
     }
     //
     auto it = word_set.begin();

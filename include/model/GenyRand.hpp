@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <algorithm>
 #include "RandomUtils.hpp" 
 #include "WordBase.hpp"
 
@@ -87,23 +88,15 @@ public:
      * @details This method allows to generate un strong password with multiple parameters
      *          The user can fully customise the the return of  the function
      * @param[in] lenght The lenght of the generated passw
-     * @param[in] c_letter If true, the passw can contain letter beetween a and z
-     * @param[in] c_int If true, the passw can contain number beetween 0 and 9
-     * @param[in] c_schar If true, the passw can contain specials characters like `[` or '%'
-     * @param[in] p_char If true, the passw can contain ponctuation char like '?' or '!'
+     * @param[in] generators A reference of vector for all generator use.
      * @param[in] homogen If true, the generation of the passw will be completly random, if not, the char of the passw word will be group by type
-     * @param[in] w_base If true, the generator can use the word in the database for gen a part of passw
      * @return A secure password with the preference of the user
      * @exception invalid_arguments If all th c_% are False. The minimum is 1
      * */
     string generate_secure_passw(
-        const size_t lenght,
-        const bool c_letter,
-        const bool c_int,
-        const bool c_schar,
-        const bool p_char = true,
-        const bool homogen = true,
-        const bool w_base = false
+        const size_t lenght, 
+        vector<generator> &generators, 
+        const bool homogen = true
     );
 
     /**
@@ -114,10 +107,6 @@ public:
      * @param[in] n_bloc The number of bloc in the generated uid
      * @param[in] l_bloc The lenght of one bloc in the uid
      * @param[in] s_bloc The separator of bloc
-     * @param[in] c_letter If true, the uid can contain letter beetween a and z
-     * @param[in] c_int If true, the uid can contain number beetween 0 and 9
-     * @param[in] c_schar If true, the uid can contain specials characters like `[` or '%'
-     * @param[in] p_char If true, the passw can contain ponctuation char like '?' or '!'
      * @param[in] homogen If true, the generation of the passw will be completly random, if not, the char of the passw word will be group by type 
      * @return A unique customised uid
      * @exception If all th c_% are False. The minimum is 1
@@ -126,10 +115,7 @@ public:
         const size_t n_bloc,
         const size_t l_bloc,
         const char s_bloc,
-        const bool c_letter,
-        const bool c_int,
-        const bool c_schar,
-        const bool p_char ,
-        const bool homogen
+        vector<generator> generators,
+        const bool homogen = true
     );
 };

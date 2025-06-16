@@ -13,17 +13,24 @@ const vector<char> Random::p_char = {':', ';', '?', '.', '\'', '\"', };
 
 size_t Random::generate_rand_num(size_t _max, size_t _min) {
     if (_min > _max)
-        throw invalid_argument("Min must be less than or equal to Max");
-    
-    // Initialiser le générateur si besoin
-    static bool initialized = false;
-    if (!initialized) {
-        srand(static_cast<unsigned int>(time(nullptr)));
-        initialized = true;
-    }
+        throw std::invalid_argument("Min must be less than or equal to Max");
 
-    return _min + rand() % (_max - _min + 1);
+    static thread_local std::mt19937 generator(
+        std::chrono::high_resolution_clock::now().time_since_epoch().count()
+    );
+    static size_t last_value = -1;
+
+    std::uniform_int_distribution<size_t> distribution(_min, _max);
+
+    size_t val;
+    do {
+        val = distribution(generator);
+    } while (val == last_value && _max > _min); // Pour éviter répétition immédiate
+
+    last_value = val;
+    return val;
 }
+
 
 string Random::get_rand_id(size_t nbr_string, size_t nbr_char){
     if(nbr_string == 0 || nbr_char == 0)

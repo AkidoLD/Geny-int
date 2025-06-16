@@ -17,11 +17,11 @@ int main(int argc, char* argv[]){
     GenyRand geny;
     vector<GenyRand::generator> gen_list{
         GenyRand::generator::c_l_alpha,
-        GenyRand::generator::c_p_char,
         GenyRand::generator::c_u_alpha,
+        GenyRand::generator::c_digit,
+        GenyRand::generator::w_db_char
     };
-    cout << geny.random_geny(gen_list, 20) <<endl;
-    // cout << geny.get_wordList() <<endl;
-    cout << geny.get_rand_str(5);
+    //
+    cout << geny.generate_secure_passw(20, gen_list,false);
     return 0;
 }
