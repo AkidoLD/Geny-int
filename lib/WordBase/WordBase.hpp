@@ -22,11 +22,23 @@ private:
      * @brief Word Map
      */
     map<size_t, unordered_set<string>> wordList;
+
+    /**
+     * @brief The database file directory
+     */
     const string database; 
+
+    /**
+     * @brief The state of the database
+     */
+    bool is_valid = false;
 
 public:
     //Constructeur
     WordBase(const string database = DEFAUT_DATABASE);
+
+    //Destructeur
+    ~WordBase();
 
     //Methodes
 private:
@@ -93,4 +105,20 @@ public:
      * @return The const ref of `wordList` of `WordBase`
      */
     const map<size_t, unordered_set<string>> & get_wordList() const {return wordList;}
+
+    /**
+     * @brief Get the statement of a WordBase
+     * @details This methode allows to get the state of the WordBase
+     * @return the state of the WordBase
+     */
+    bool get_state() const{ return is_valid;}
+
+    /**
+     * @brief Append new word in the WordBase
+     * @details This method allow to append a new word in the WordBase
+     * @param[in] word The word to append
+     * @return True if the operation pass and false if not
+     * @exception invalid_arguments if the word in parameter is empty
+     */
+    bool append_word(const string &word);
 };

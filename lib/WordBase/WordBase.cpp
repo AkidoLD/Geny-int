@@ -3,7 +3,13 @@
 WordBase::WordBase(const string database):
     database(database)
 {
+    if(this->load_database()) is_valid = true;
+}
 
+WordBase::~WordBase(){
+    if(!this->save_database()){
+        cerr << "Une erreur est survenu lors de la sauvegarde des donnees" << endl;
+    }
 }
 
 bool WordBase::create_file_if(const string file){
@@ -70,12 +76,9 @@ const unordered_set<string> &WordBase::get_words_with_length(size_t lenght){
 
 bool WordBase::word_exist(const string s_word){
     if(s_word.empty()) return false;
-    for(auto set : wordList){
-        if(set.second.find(s_word) != set.second.end()){
-            return true;
-        }
-    }
-    return false;
+    if(wordList.find(s_word.length()) == wordList.end()) return false;
+    if(wordList[s_word.length()].find(s_word) == wordList[s_word.length()].end()) return false;
+    return true;
 }
 
 size_t WordBase::number_of_word(){
@@ -95,9 +98,9 @@ ostream &operator<<(ostream &os, WordBase &wordBase){
         os << "La WordBase est vide" << endl;
         return os;
     }
-    os << "Liste des mots contenu dans la WordBase" << endl;
+    os << "==== Liste des mots contenu dans la WordBase ====" << endl;
     for(auto set : wordBase.wordList){
-        os << ">==== Taille = " << set.first << "====> : " <<endl;
+        os << ">==== Taille = " << set.first << " ====> : " <<endl;
         for(auto word : set.second)
             os << "- " << word << endl;
         //
@@ -105,3 +108,12 @@ ostream &operator<<(ostream &os, WordBase &wordBase){
     }
     return os << "==== Fin de la list ====" <<endl;
 }
+
+bool WordBase::append_word(const string &word){
+    if(word.empty())
+        throw invalid_argument("Le mot passe en parametre ne peut vide");
+    //
+    wordList[word.length()].insert(word);
+    return true;
+}
+

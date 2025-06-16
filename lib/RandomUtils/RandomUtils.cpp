@@ -42,7 +42,7 @@ string Random::get_rand_id(size_t nbr_string, size_t nbr_char){
 }
 
 char Random::gen_rand_letter(bool upper){
-    char gletter =  generate_rand_num(static_cast<size_t>('z'), static_cast<size_t>('a'));
+    char gletter =  generate_rand_num('z','a');
     return upper ? toupper(gletter) : gletter;
 }
 
