@@ -14,7 +14,7 @@ int main(int argc, char* argv[]){
     // wordbase.save_database();
     // cout << "Vous avez actuellement "<<wordbase.number_of_word() << " mots dans votre base";
 
-    GenyRand geny;
+    GenyRand geny("/home/akido-ld/Documents/Memo/Guide pour Github et Git.txt");
     vector<generator> gen_list{
         generator::c_u_alpha,
         generator::c_digit,

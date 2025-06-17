@@ -28,6 +28,7 @@ public:
     
 public:
     GenyRand();
+    GenyRand(const string load_database);
 
 //Methodes
 public:

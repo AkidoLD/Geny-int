@@ -7,6 +7,15 @@ GenyRand::GenyRand(){
     wordbase.save_database();
 }
 
+GenyRand::GenyRand(const string load_database):
+    wordbase(load_database)
+{
+    if(wordbase.load_database() == false){
+        cerr << "Erreur lors du chargement des donnees de l'app" << endl;
+    }   
+    wordbase.save_database();
+}
+
 string const GenyRand::random_geny(const vector<generator> &gen_list, size_t gchar_l){
     if(gen_list.empty())
         throw invalid_argument("La generator list ne peut etre vide");
