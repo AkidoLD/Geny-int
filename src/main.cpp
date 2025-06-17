@@ -22,9 +22,14 @@ int main(int argc, char* argv[]){
         generator::w_db_char
     };
     //
-    cout << geny.generate_secure_passw(10, gen_list) << endl;
-    cout << geny.generate_unique_uid(5, 5, "-", gen_list, true) << endl;
-    cout << geny.generate_personal_pseudo("AkidoLD", 10, 5, gen_list, false) << endl;
+    for (size_t i = 0; i < 100; i++)
+    {
+        cout << geny.generate_secure_passw(10, gen_list, false) << endl;
+        cout << geny.generate_unique_uid(5, 5, " |=| ", gen_list, false) << endl;
+        cout << geny.generate_personal_pseudo("AkidoLD", 10, 10, gen_list, true) << endl;
+        cout <<endl << endl;
+        /* code */
+    }
 
     return 0;
 }
