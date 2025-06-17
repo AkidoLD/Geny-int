@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char* argv[]){
     QApplication app (argc, argv);
-    MainWindow window;
+    MainWindow window("Geny-int");
     window.setWindowTitle("Geny");
     window.resize(720, 940);
     window.show();
