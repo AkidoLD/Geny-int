@@ -4,7 +4,6 @@ GenyRand::GenyRand(){
     if(wordbase.load_database() == false){
         cerr << "Erreur lors du chargement des donnees de l'app" << endl;
     }   
-        
     wordbase.save_database();
 }
 
@@ -95,14 +94,14 @@ string GenyRand::generate_unique_uid(
         }
     }
 
-    return join_randomly(gen_uid, "-");
+    return join_randomly(gen_uid, s_bloc);
 }
 
 
 const string GenyRand::get_rand_str(size_t const lenght){
     if(lenght == 0) return "";
     const unordered_set<string>  *word_set = wordbase.get_words_with_length(lenght);
-    if(word_set->empty()) return "";
+    if(word_set == nullptr || word_set->empty()) return "";
     //
     auto it = word_set->begin();
     advance(it, generate_rand_num(word_set->size() - 1));
@@ -114,17 +113,43 @@ const string GenyRand::generate_personal_pseudo(
         const string &sample,
         const size_t max_l,
         const size_t min_l,
-        vector<generator> generators
+        vector<generator> generators,
+        const bool r_sample
 ){
-    if(!max_l || max_l < min_l || max_l < sample.length())
-        throw invalid_argument("La taille maximale ne peut etre ni null ni inferieur a la taille minimal ou a la longueur de l'echantillon");
     if(generators.empty())
         throw invalid_argument("La liste de generateur ne peux pas etre null");
     //
-    string main_str;
+    if(!(min_l > 0 && min_l <= max_l))
+        throw invalid_argument("La taille taille minimal ne peux etre null et doit toujours etre inferieur a la taille maximal");
+    //
+    if(r_sample and min_l < sample.size())
+        throw range_error("Si l'echantillon est requis, la taille minimal ne peux etre inferieur a la taille de celui ci");
+    //
+    size_t g_pseudo_l = generate_rand_num(max_l, min_l);// Longueur final du pseudo genere
+    string g_pseudo = ""; g_pseudo.reserve(g_pseudo_l); //Alloue la taille necessaire
+
+    vector<string> g_tokens; //Tokens generes
+    size_t g_tokens_l = 0; //La taille a jour de la somme des tokens deja genere
+
+    if(r_sample or rand_predicat()) {
+        g_tokens.push_back(sample);
+        g_tokens_l += sample.length();
+    }
+
+    while(g_tokens_l < g_pseudo_l){
+        size_t g_token_l = generate_rand_num((g_pseudo_l - g_tokens_l), 1);
+        string g_token = random_geny(generators, g_token_l);
+        if(g_token.empty()) continue;
+        g_tokens.push_back(g_token);
+        g_tokens_l += g_token.length();
+    }
+    g_pseudo = join_randomly(move(g_tokens));
+    g_pseudo.resize(g_pseudo_l);
+    //
+    return g_pseudo;
 }
 
-vector<GenyRand::generator> && GenyRand::make_generator_list(
+vector<generator> GenyRand::make_generator_list(
         const bool c_digit,
         const bool c_u_alpha,
         const bool c_l_alpha,
@@ -140,5 +165,5 @@ vector<GenyRand::generator> && GenyRand::make_generator_list(
     if(c_p_char) generator_list.push_back(generator::c_p_char);
     if(w_db_char) generator_list.push_back(generator::w_db_char);
     //
-    return move(generator_list);
+    return generator_list;
 }

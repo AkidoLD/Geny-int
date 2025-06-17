@@ -6,24 +6,25 @@
 #include "WordBase.hpp"
 #include <string>
 
+/**
+ * @brief Enumation of all generator
+ */
+enum class generator{
+    none,
+    c_digit,
+    c_u_alpha,
+    c_l_alpha,
+    c_s_char,
+    c_p_char,
+    w_db_char
+};
 class GenyRand : protected Random{
+
 //Attributs
 private: 
     WordBase wordbase;
 
 public:
-    /**
-     * @brief Enumation of all generator
-     */
-    enum class generator{
-        none,
-        c_digit,
-        c_u_alpha,
-        c_l_alpha,
-        c_s_char,
-        c_p_char,
-        w_db_char
-    };
     
 public:
     GenyRand();
@@ -137,7 +138,8 @@ public:
         const string &sample,
         const size_t max_l,
         const size_t min_l,
-        vector<generator> generators    
+        vector<generator> generators,
+        const bool r_sample = false    
     );
 
     /**
@@ -151,7 +153,7 @@ public:
      * @param[in] w_db_char If true the generator will be added to the generators list
      * @return A correct generator list
      */
-    vector<generator> && make_generator_list(
+    vector<generator> make_generator_list(
         const bool c_digit,
         const bool c_u_alpha,
         const bool c_l_alpha,

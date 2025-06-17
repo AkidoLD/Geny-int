@@ -91,3 +91,7 @@ string Random::join_randomly(const vector<string>& tokens, const string& _sep) {
     vector<string> copy = tokens;
     return join_randomly(copy, _sep);
 }
+
+bool Random::rand_predicat(){
+    return static_cast<bool>(generate_rand_num(1));
+}

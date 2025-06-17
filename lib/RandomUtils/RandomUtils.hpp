@@ -99,6 +99,13 @@ class Random{
      */
     static string join_randomly(const vector<string>& tokens, const string& _sep = "");
 
+    /**
+     * @brief Get randomly true or false
+     * @details When this methods is call, a binary beetween true of false is return
+     * @return True or false
+     */
+    static bool rand_predicat();
+
 };
 
 #endif /* B5E463AA_72D7_4614_91C8_344F26D70A37 */
