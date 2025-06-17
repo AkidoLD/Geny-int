@@ -63,10 +63,10 @@ public:
      * @brief Get a set of word
      * @details This method allows to get a reference of unordered_set of word of specific `lenght`
      * @param[in] lenght the len of the word
-     * @return The unorded_set reference of word a `lenght` word in database
+     * @return The unorded_set pointer of word a `lenght` word in database
      * @exception `range_error` if no have unorded_set of word with this`lenght` 
      */
-    const unordered_set<string> &get_words_with_length(size_t lenght);
+    const unordered_set<string>* get_words_with_length(size_t length) const;
 
     /**
      * @brief Say if a word exit in the wordList

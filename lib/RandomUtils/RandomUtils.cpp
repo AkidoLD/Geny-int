@@ -70,3 +70,24 @@ const T &Random::make_rand_choice(const vector<T> &values){
     //
     return values[generate_rand_num(values.size() - 1)];
 }
+
+string Random::join_randomly(vector<string>& tokens, const string& _sep) {
+    if(tokens.empty()) return "";
+    //
+    string result;
+    while (!tokens.empty()) {
+        size_t index = generate_rand_num(tokens.size() -1);
+        result += std::move(tokens[index]);
+
+        tokens[index] = std::move(tokens.back());
+        tokens.pop_back();
+
+        if (!_sep.empty() && !tokens.empty()) result += _sep;
+    }
+    return result;
+}
+
+string Random::join_randomly(const vector<string>& tokens, const string& _sep) {
+    vector<string> copy = tokens;
+    return join_randomly(copy, _sep);
+}

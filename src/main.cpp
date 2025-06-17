@@ -16,12 +16,14 @@ int main(int argc, char* argv[]){
 
     GenyRand geny;
     vector<GenyRand::generator> gen_list{
-        GenyRand::generator::c_l_alpha,
         GenyRand::generator::c_u_alpha,
         GenyRand::generator::c_digit,
+        GenyRand::generator::c_s_char,
         GenyRand::generator::w_db_char
     };
     //
-    cout << geny.generate_secure_passw(20, gen_list,false);
+    cout << geny.generate_unique_uid(5, 6,"-",gen_list,true) <<endl;
+    cout << geny.generate_unique_uid(5, 6,"-",gen_list, false) <<endl;
+
     return 0;
 }

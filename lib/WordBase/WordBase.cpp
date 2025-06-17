@@ -67,11 +67,12 @@ bool WordBase::save_database(string database){
     return true;        
 }
 
-const unordered_set<string> &WordBase::get_words_with_length(size_t lenght){
-    if(wordList.find(lenght) == wordList.end())
-        throw range_error("La cle passe en parametre n'existe pas.");
-    //
-    return wordList[lenght];
+const unordered_set<string>* WordBase::get_words_with_length(size_t length) const {
+    auto it = wordList.find(length);
+    if (it == wordList.end()) {
+        return nullptr; // Rien trouvé
+    }
+    return &(it->second);
 }
 
 bool WordBase::word_exist(const string s_word){

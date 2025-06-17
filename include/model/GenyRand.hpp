@@ -4,6 +4,7 @@
 #include <algorithm>
 #include "RandomUtils.hpp" 
 #include "WordBase.hpp"
+#include <string>
 
 class GenyRand : protected Random{
 //Attributs
@@ -36,7 +37,7 @@ public:
      * @param[in] gen_list Generator list who been used
      * @return The random char 
      */
-    string const random_geny(vector<generator> &gen_list, size_t time = 1);
+    string const random_geny(const vector<generator> &gen_list, size_t time = 1);
 
     //Bon, creation un suite de fonction specialise de generation pour pouvoir utiliser un map
     /**
@@ -107,6 +108,7 @@ public:
      * @param[in] n_bloc The number of bloc in the generated uid
      * @param[in] l_bloc The lenght of one bloc in the uid
      * @param[in] s_bloc The separator of bloc
+     * @param[in] generators The generator who be used to generate the uid
      * @param[in] homogen If true, the generation of the passw will be completly random, if not, the char of the passw word will be group by type 
      * @return A unique customised uid
      * @exception If all th c_% are False. The minimum is 1
@@ -114,8 +116,47 @@ public:
     string generate_unique_uid(
         const size_t n_bloc,
         const size_t l_bloc,
-        const char s_bloc,
-        vector<generator> generators,
+        const string s_bloc,
+        vector<generator> &generators,
         const bool homogen = true
     );
+
+    /**
+     * @brief Generate a personal Pseudonyme
+     * @details This methods allows to generate a customised Pseudo
+     * @param[in] sample The word we can use to generate the pseudonyme
+     * @param[in] max_l The max lenght of the generated string
+     * @param[in] min_l The min lenght of the generated string.
+     *          By default, it the size of the the lenght of `sample` is > `min_lenght`
+     * @param[in] generators The generators list
+     * @return An unique and fully customised pseudonyme
+     * @exception invalid_argument if the max_l is less the the min_l
+     * @exception invalid_argument if the max_l is equal to 0
+     */
+    const string generate_personal_pseudo(
+        const string &sample,
+        const size_t max_l,
+        const size_t min_l,
+        vector<generator> generators    
+    );
+
+    /**
+     * @brief Initialise a generators vector
+     * @details This methos allows the correctly initialise the requiered generator
+     * @param[in] c_digit If true the generator will be added to the generators list
+     * @param[in] c_u_alpha If true the generator will be added to the generators list
+     * @param[in] c_l_alpha If true the generator will be added to the generators list
+     * @param[in] c_s_char If true the generator will be added to the generators list
+     * @param[in] c_p_char If true the generator will be added to the generators list
+     * @param[in] w_db_char If true the generator will be added to the generators list
+     * @return A correct generator list
+     */
+    vector<generator> && make_generator_list(
+        const bool c_digit,
+        const bool c_u_alpha,
+        const bool c_l_alpha,
+        const bool c_s_char,
+        const bool c_p_char,
+        const bool w_db_char
+    ); 
 };

@@ -12,6 +12,8 @@
 #include <chrono>
 #include <thread>
 #include <random>
+#include <algorithm>
+#include <string>
 
 
 using namespace std; 
@@ -79,6 +81,24 @@ class Random{
      */
     template<class T>
     static const T &make_rand_choice(const vector<T> &values);
+
+    /**
+     * @brief Randomly joins the words from a vector with an optional separator
+     * @param[in,out] elements The list of words to join. Will be emptied during execution.
+     * @param[in] separator Optional string inserted between each word (default is "")
+     * @return A string made of all input words, randomly ordered and separated
+     * @note This function modifies the input vector by removing elements (no replacement)
+     */
+    static string join_randomly(vector<string>& tokens, const string& _sep = "");
+
+    /**
+     * @brief Randomly joins the words from a vector with an optional separator (non-destructive)
+     * @param[in] elements The list of words to join
+     * @param[in] separator Optional string inserted between each word (default is "")
+     * @return A string made of all input words, randomly ordered and separated
+     */
+    static string join_randomly(const vector<string>& tokens, const string& _sep = "");
+
 };
 
 #endif /* B5E463AA_72D7_4614_91C8_344F26D70A37 */

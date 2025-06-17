@@ -8,7 +8,7 @@ GenyRand::GenyRand(){
     wordbase.save_database();
 }
 
-string const GenyRand::random_geny(vector<generator> &gen_list, size_t gchar_l){
+string const GenyRand::random_geny(const vector<generator> &gen_list, size_t gchar_l){
     if(gen_list.empty())
         throw invalid_argument("La generator list ne peut etre vide");
     //
@@ -62,6 +62,7 @@ string GenyRand::generate_secure_passw(const size_t lenght, vector<generator> &g
     while(gen_passw.length() < lenght){
         gen_passw += random_geny(generators, homo_coef);
     }
+    gen_passw.resize(lenght);
     //
     return gen_passw;
 }
@@ -69,30 +70,75 @@ string GenyRand::generate_secure_passw(const size_t lenght, vector<generator> &g
 string GenyRand::generate_unique_uid(
     const size_t n_bloc,
     const size_t l_bloc,
-    const char s_bloc,
-    vector<generator> generators,
+    const string s_bloc,
+    vector<generator> &generators,
     const bool homogen
-)
-{
-    if(!n_bloc || !l_bloc) return "";
-    if(generators.empty())
-        throw invalid_argument("La liste de generateur ne peut etre vide");
-    //
-    
+) {
+    if (n_bloc == 0 || l_bloc == 0)
+        return "";
+
+    if (generators.empty())
+        throw std::invalid_argument("La liste de générateurs ne peut être vide");
+
+    const size_t homo_coef = homogen ? 1 : l_bloc;
+    vector<string> gen_uid;
+    string bloc;
+
+    // Génération des blocs
+    while (gen_uid.size() < n_bloc) {
+        bloc += random_geny(generators, homo_coef);
+
+        if (bloc.size() >= l_bloc) {
+            bloc.resize(l_bloc); // Tronque au cas où on dépasse
+            gen_uid.push_back(std::move(bloc));
+            bloc.clear();
+        }
+    }
+
+    return join_randomly(gen_uid, "-");
 }
+
 
 const string GenyRand::get_rand_str(size_t const lenght){
     if(lenght == 0) return "";
-    unordered_set<string> word_set;
-    try{
-        word_set = wordbase.get_words_with_length(lenght);
-    }catch(range_error &e){
-        cerr << e.what() << endl;
-        return "";
-    }
+    const unordered_set<string>  *word_set = wordbase.get_words_with_length(lenght);
+    if(word_set->empty()) return "";
     //
-    auto it = word_set.begin();
-    advance(it, generate_rand_num(word_set.size() - 1));
+    auto it = word_set->begin();
+    advance(it, generate_rand_num(word_set->size() - 1));
     //
     return  *it;
+}
+
+const string GenyRand::generate_personal_pseudo(
+        const string &sample,
+        const size_t max_l,
+        const size_t min_l,
+        vector<generator> generators
+){
+    if(!max_l || max_l < min_l || max_l < sample.length())
+        throw invalid_argument("La taille maximale ne peut etre ni null ni inferieur a la taille minimal ou a la longueur de l'echantillon");
+    if(generators.empty())
+        throw invalid_argument("La liste de generateur ne peux pas etre null");
+    //
+    string main_str;
+}
+
+vector<GenyRand::generator> && GenyRand::make_generator_list(
+        const bool c_digit,
+        const bool c_u_alpha,
+        const bool c_l_alpha,
+        const bool c_s_char,
+        const bool c_p_char,
+        const bool w_db_char
+){
+    vector<generator> generator_list;
+    if(c_digit) generator_list.push_back(generator::c_digit);
+    if(c_l_alpha) generator_list.push_back(generator::c_l_alpha);
+    if(c_u_alpha) generator_list.push_back(generator::c_u_alpha);
+    if(c_s_char) generator_list.push_back(generator::c_s_char);
+    if(c_p_char) generator_list.push_back(generator::c_p_char);
+    if(w_db_char) generator_list.push_back(generator::w_db_char);
+    //
+    return move(generator_list);
 }
