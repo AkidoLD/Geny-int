@@ -10,10 +10,11 @@ MainWindow::MainWindow(const QString title, QWidget * parent):
 {
     this->setObjectName("main-window");
     this->setWindowTitle(title);
-    this->resize(620, 720);
-    this->setFixedWidth(620);
-    this->setMinimumHeight(480);
+    this->resize(650, 720);
+    this->setFixedWidth(650);
+    this->setMinimumHeight(600);
     this->setCentralWidget(widget);
+    this->setContentsMargins(0, 0, 0, 0);
     //
     widget->setObjectName("main-window-widget");
     widget->setLayout(layout);
