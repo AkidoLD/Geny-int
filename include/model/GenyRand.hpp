@@ -140,7 +140,8 @@ public:
         const size_t max_l,
         const size_t min_l,
         vector<generator> generators,
-        const bool r_sample = false    
+        const bool homo_gen = true,
+        const bool r_sample = false
     );
 
     /**

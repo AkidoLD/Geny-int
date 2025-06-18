@@ -89,7 +89,7 @@ class Random{
      * @return A string made of all input words, randomly ordered and separated
      * @note This function modifies the input vector by removing elements (no replacement)
      */
-    static string join_randomly(vector<string>& tokens, const string& _sep = "");
+    static string join_randomly(vector<string>& tokens,  const bool rand_join = true, const string& _sep = "");
 
     /**
      * @brief Randomly joins the words from a vector with an optional separator (non-destructive)
@@ -97,7 +97,7 @@ class Random{
      * @param[in] separator Optional string inserted between each word (default is "")
      * @return A string made of all input words, randomly ordered and separated
      */
-    static string join_randomly(const vector<string>& tokens, const string& _sep = "");
+    static string join_randomly(const vector<string>& tokens, const bool rand_join = true, const string& _sep = "");
 
     /**
      * @brief Get randomly true or false

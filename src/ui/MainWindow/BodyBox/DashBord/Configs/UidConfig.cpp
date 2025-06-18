@@ -21,6 +21,7 @@ UidConfig::UidConfig(QWidget * parent):
     n_bloc_spin->setMaximum(100);
     l_bloc_spin->setMaximum(100);
     s_bloc_edit->setMaxLength(10);
+    s_bloc_edit->setPlaceholderText("Separateur ici...");
     n_uid_spin->setMaximum(1000);
     //Row 0
     configs_grid->addWidget(l_bloc_label, 0, 0, 1, 1);

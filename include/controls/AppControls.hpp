@@ -17,9 +17,9 @@ private:
 public:
     AppControls(MainWindow * genyview, GenyRand * genyModel, QObject * parent = nullptr);
     //
-    const vector<string> generate_random_password(PasswConfig *); // Recuperer les information, generer et afficher
-    const vector<string> generate_random_uid(UidConfig *);  // Recuperer les information, generer et afficher
-    const vector<string> generate_random_pseudo(PseudoConfig *); // Recuperer les information, generer et afficher
+    const QStringList generate_random_password(PasswConfig *); // Recuperer les information, generer et afficher
+    const QStringList generate_random_uid(UidConfig *);  // Recuperer les information, generer et afficher
+    const QStringList generate_random_pseudo(PseudoConfig *); // Recuperer les information, generer et afficher
 
 //Slots
 private slots:

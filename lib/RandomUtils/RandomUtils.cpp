@@ -71,12 +71,12 @@ const T &Random::make_rand_choice(const vector<T> &values){
     return values[generate_rand_num(values.size() - 1)];
 }
 
-string Random::join_randomly(vector<string>& tokens, const string& _sep) {
+string Random::join_randomly(vector<string>& tokens, const bool rand_join, const string& _sep) {
     if(tokens.empty()) return "";
     //
     string result;
     while (!tokens.empty()) {
-        size_t index = generate_rand_num(tokens.size() -1);
+        size_t index = rand_join ? generate_rand_num(tokens.size() -1) : 0;
         result += std::move(tokens[index]);
 
         tokens[index] = std::move(tokens.back());
@@ -87,9 +87,9 @@ string Random::join_randomly(vector<string>& tokens, const string& _sep) {
     return result;
 }
 
-string Random::join_randomly(const vector<string>& tokens, const string& _sep) {
+string Random::join_randomly(const vector<string>& tokens, const bool rand_join, const string& _sep) {
     vector<string> copy = tokens;
-    return join_randomly(copy, _sep);
+    return join_randomly(copy, rand_join, _sep);
 }
 
 bool Random::rand_predicat(){

@@ -12,6 +12,8 @@ class MainWindow : public QMainWindow{
 private:
     QWidget * widget;
     QVBoxLayout * layout;
+    
+public:
     HeaderBox * headerBox; 
     BodyBox * bodyBox;
     FooterBox * footerBox;

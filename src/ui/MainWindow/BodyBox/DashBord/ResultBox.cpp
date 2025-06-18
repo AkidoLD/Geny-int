@@ -23,5 +23,14 @@ ResultBox::ResultBox(const QString &result_title_text,QWidget * parent):
     result_scroll->setWidgetResizable(true);
     //
     result_list->setObjectName("result-box-list");
-    result_list->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    result_list->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+}
+
+void ResultBox::display_token_list(const QStringList &gen_tokens){
+    if(gen_tokens.empty()){
+        result_list->clear();
+        return;
+    }
+    result_list->clear();
+    result_list->addItems(gen_tokens);
 }

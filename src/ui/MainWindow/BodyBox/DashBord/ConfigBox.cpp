@@ -25,19 +25,7 @@ ConfigBox::ConfigBox(QWidget * parent):
     this->setObjectName("config-box");
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     this->setLayout(vlayout);
-    this->setStyleSheet(R"(
-            #config-box{
-                background-color: white;
-                border-radius: 15px;
-                margin: 0px;
-                padding: 5px;
-            }
 
-            #config-box QLabel{
-                color: white;
-            }
-        )"
-    );
     //
     vlayout->setObjectName("config-box-layout");
     vlayout->addWidget(mode_name, 0, Qt::AlignLeft | Qt::AlignTop);
@@ -64,4 +52,18 @@ ConfigBox::ConfigBox(QWidget * parent):
     p_char_label->setText("Caracteres de ponctuation : ");
     wdb_char_label->setText("Utiliser la base de mot :");
     homo_gen_label->setText("Generation Homogene :");
+    
+    //Connect Signals
+    QObject::connect(valid_button, &QPushButton::clicked, [&](){
+        qDebug() << "G_Button clicked";
+        emit generate_bt_clicked(this);
+    });
+
+    //Lier chaque label a sont checkbox
+}
+
+
+void ConfigBox::connect_label_to_check(QLabel *label, QCheckBox *check){
+    if(!label || !check) return;
+    
 }

@@ -5,8 +5,11 @@
 #include <QScrollArea>
 #include <QListWidget>
 #include <QLabel>
+#include <string>
+#include <vector>
 
 class ResultBox : public QWidget{
+    Q_OBJECT
 //Attributs
 private:
     QVBoxLayout * vlayout;
@@ -17,5 +20,8 @@ private:
 //Methodes
 public:
     ResultBox(const QString &result_title_text, QWidget * parent = nullptr);
+
+public :
+    void display_token_list(const QStringList &gen_tokens);
 
 };

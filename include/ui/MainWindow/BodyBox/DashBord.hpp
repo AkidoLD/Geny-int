@@ -19,6 +19,7 @@ public:
     
 signals:
     void display_bt_clicked(ConfigBox *, ResultBox*);
+    void generate_bt_clicked(ConfigBox *, ResultBox*);
 } ;
 
 class UidPack : public QObject{
@@ -31,6 +32,7 @@ public:
     UidPack(QObject * parent = nullptr);
 signals:
     void display_bt_clicked(ConfigBox *, ResultBox*);
+    void generate_bt_clicked(ConfigBox *, ResultBox*);
 };
 
 class PseudoPack : public QObject{
@@ -44,6 +46,7 @@ public:
 
 signals:
     void display_bt_clicked(ConfigBox *, ResultBox*);
+    void generate_bt_clicked(ConfigBox *, ResultBox*);
 
 };
 
@@ -59,6 +62,7 @@ private:
     QWidget * switchStackWidget;
     QVBoxLayout * switchStackLayout;
     //
+public :
     PasswordPack * passwPack;
     UidPack * uidPack;
     PseudoPack * pseudoPack;
@@ -70,5 +74,9 @@ public:
 
 private slots:
     void on_display_bt_clicked(ConfigBox *, ResultBox *);
+    void on_generate_signal_emit(ConfigBox *, ResultBox *);
+
+signals:
+    void generate_bt_clicked(ConfigBox *, ResultBox *);
 
 };

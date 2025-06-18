@@ -103,7 +103,7 @@ string GenyRand::generate_unique_uid(
         }
     }
 
-    return join_randomly(gen_uid, s_bloc);
+    return join_randomly(gen_uid, homogen,s_bloc);
 }
 
 
@@ -123,13 +123,14 @@ const string GenyRand::generate_personal_pseudo(
         const size_t max_l,
         const size_t min_l,
         vector<generator> generators,
+        const bool homo_gen,
         const bool r_sample
 ){
     if(generators.empty())
         throw invalid_argument("La liste de generateur ne peux pas etre null");
     //
     if(!(min_l > 0 && min_l <= max_l))
-        throw invalid_argument("La taille taille minimal ne peux etre null et doit toujours etre inferieur a la taille maximal");
+        throw invalid_argument("La taille taille minimal ne peux etre null et doit toujours etre inferieur ou egale a la taille maximal");
     //
     if(r_sample and min_l < sample.size())
         throw range_error("Si l'echantillon est requis, la taille minimal ne peux etre inferieur a la taille de celui ci");
@@ -152,7 +153,7 @@ const string GenyRand::generate_personal_pseudo(
         g_tokens.push_back(g_token);
         g_tokens_l += g_token.length();
     }
-    g_pseudo = join_randomly(move(g_tokens));
+    g_pseudo = join_randomly(move(g_tokens), homo_gen);
     g_pseudo.resize(g_pseudo_l);
     //
     return g_pseudo;

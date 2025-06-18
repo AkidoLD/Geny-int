@@ -7,8 +7,13 @@ PasswordPack::PasswordPack(QObject * parent):
     displayButton(new QPushButton())
 {
     displayButton->setText("Passw");
+    displayButton->setFixedSize(50, 50);
     QObject::connect(displayButton, &QPushButton::clicked, [&](){
         emit display_bt_clicked(passwConf, resultBox);
+    });
+    //
+    QObject::connect(passwConf, &ConfigBox::generate_bt_clicked, [&](ConfigBox *conf){
+        emit generate_bt_clicked(conf, resultBox);
     });
 }
 
@@ -19,9 +24,15 @@ UidPack::UidPack(QObject * parent):
     displayButton(new QPushButton())
 {
     displayButton->setText("Uid");
+    displayButton->setFixedSize(50, 50);
     QObject::connect(displayButton, &QPushButton::clicked, [&](){
         emit display_bt_clicked(uidConf, resultBox);
     });
+    //
+    QObject::connect(uidConf, &ConfigBox::generate_bt_clicked, [&](ConfigBox *conf){
+        emit generate_bt_clicked(conf, resultBox);
+    });
+
 }
 
 PseudoPack::PseudoPack(QObject * parent):
@@ -31,8 +42,13 @@ PseudoPack::PseudoPack(QObject * parent):
     displayButton(new QPushButton())
 {
     displayButton->setText("Pseudo");
+    displayButton->setFixedSize(50, 50);
     QObject::connect(displayButton, &QPushButton::clicked, [&](){
         emit display_bt_clicked(pseudoConf, resultBox);
+    });
+    //
+    QObject::connect(pseudoConf, &ConfigBox::generate_bt_clicked, [&](ConfigBox *conf){
+        emit generate_bt_clicked(conf, resultBox);
     });
 }
 
@@ -55,11 +71,13 @@ DashBord::DashBord(QWidget * parent):
     this->setContentsMargins(0, 0, 0, 0);
     //  
     glayout->setObjectName("dashbord-layout");
+    glayout->setContentsMargins(0, 0, 0, 0);
     glayout->addWidget(configsStack, 0, 0, 1, 1,  Qt::AlignVCenter);
     glayout->addWidget(switchStackWidget, 0, 1, 1, 1, Qt::AlignVCenter);
     glayout->addWidget(resultStack, 1, 0, 1, 2);
     //
     configsStack->setObjectName("dashbord-config-stack");
+    configsStack->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     configsStack->addWidget(passwPack->passwConf);
     configsStack->addWidget(uidPack->uidConf);
     configsStack->addWidget(pseudoPack->pseudoConf);
@@ -86,9 +104,19 @@ DashBord::DashBord(QWidget * parent):
     QObject::connect(passwPack, &PasswordPack::display_bt_clicked, this, &DashBord::on_display_bt_clicked);
     QObject::connect(uidPack, &UidPack::display_bt_clicked, this, &DashBord::on_display_bt_clicked);
     QObject::connect(pseudoPack, &PseudoPack::display_bt_clicked, this, &DashBord::on_display_bt_clicked);
+    //
+    QObject::connect(passwPack, &PasswordPack::generate_bt_clicked, this, &DashBord::on_generate_signal_emit);
+    QObject::connect(uidPack, &UidPack::generate_bt_clicked, this, &DashBord::on_generate_signal_emit);
+    QObject::connect(pseudoPack, &PseudoPack::generate_bt_clicked, this, &DashBord::on_generate_signal_emit);
 }
 
 void DashBord::on_display_bt_clicked(ConfigBox *config, ResultBox *result){
     configsStack->setCurrentWidget(config);
     resultStack->setCurrentWidget(result);
+}
+
+void DashBord::on_generate_signal_emit(ConfigBox *conf, ResultBox *result){
+    if(!conf || !result) return;
+    qDebug() << ";laksdkasd;aks dlkasd lkk;l";
+    emit generate_bt_clicked(conf, result);
 }

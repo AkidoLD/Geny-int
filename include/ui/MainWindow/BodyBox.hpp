@@ -17,4 +17,7 @@ private:
 public:
     BodyBox(QWidget * parent = nullptr);
 
+    //Getters
+    DashBord * get_dashbord()const{ return dashBord;}
+
 };

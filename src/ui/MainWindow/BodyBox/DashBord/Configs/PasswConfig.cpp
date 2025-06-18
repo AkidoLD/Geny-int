@@ -12,8 +12,15 @@ PasswConfig::PasswConfig(QWidget * parent):
     lenght_label->setText("Longueur : ");
     number_label->setText("Nombre : ");
     //
-    number_spin->setMaximum(INT32_MAX);
-    lenght_spin->setMaximum(INT32_MAX);
+    number_spin->setMaximum(9999);
+    lenght_spin->setMaximum(9999);
+    //
+    number_spin->setMinimum(1);
+    lenght_spin->setMinimum(1);
+    //
+    number_spin->setValue(10);
+    lenght_spin->setValue(10);
+    
     //Row 0
     configs_grid->addWidget(lenght_label, 0, 0, 1, 1, Qt::AlignLeft);
     configs_grid->addWidget(lenght_spin, 0, 1, 1, 3);
