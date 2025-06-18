@@ -1,9 +1,18 @@
 #include <iostream>
+#include <QApplication>
+#include <QMainWindow>
+#include <QHBoxLayout>
+#include <QLabel>
+#include "ui/MainWindow.hpp"
 
 using namespace std;
 
 int main(int argc, char* argv[]){
-    cout << "Hello Geny" << endl;
+    QApplication app (argc, argv);
+    MainWindow window("Geny-int");
+    window.setWindowTitle("Geny");
+    window.resize(720, 940);
+    window.show();
     //
-    return 0;
+    return app.exec();
 }

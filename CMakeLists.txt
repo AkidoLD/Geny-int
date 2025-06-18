@@ -14,6 +14,7 @@ endif()
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 add_subdirectory(lib/RandomUtils)
+add_subdirectory(lib/WordBase)
 
 # Fichiers sources
 file(GLOB_RECURSE SRC src/*.cpp)
@@ -29,4 +30,4 @@ target_include_directories(Geny-int PRIVATE ${CMAKE_SOURCE_DIR}/include)
 set_target_properties(Geny-int PROPERTIES AUTOMOC ON)
 
 # Lie Qt6::Widgets à ton exécutable
-target_link_libraries(Geny-int PRIVATE Qt6::Widgets RandomUtils)
+target_link_libraries(Geny-int PRIVATE Qt6::Widgets RandomUtils WordBase)
