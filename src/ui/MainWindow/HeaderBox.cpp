@@ -23,8 +23,8 @@ HeaderBox::HeaderBox(QWidget * parent):
     glayout->addWidget(present_msg, 1, 0, 1, 2, Qt::AlignLeft | Qt::AlignVCenter);
     //
     appName->setObjectName("app-name-label");
-    appName->setText("Geny");
+    appName->setText("<b style='color:Orange; font-size: 32pt;'>Geny</b>");
     //
     present_msg->setObjectName("present-msg-label");
-    present_msg->setText("Votre generateur de text prefere 😄");
+    present_msg->setText("<b style='color: black; font-size: 16pt;'>Votre generateur de text prefere 😄</b>");
 }

@@ -16,6 +16,6 @@ private:
 
 //Methodes
 public:
-    ResultBox(const QString result_title_text, QWidget * parent = nullptr);
+    ResultBox(const QString &result_title_text, QWidget * parent = nullptr);
 
 };
