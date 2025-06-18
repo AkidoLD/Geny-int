@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QCheckBox>
 #include <limits>
+#include "ui/QSLabel.hpp"
 
 class ConfigBox : public QWidget{
     Q_OBJECT    
@@ -17,13 +18,13 @@ protected:
     QGridLayout * configs_grid;
     QPushButton * valid_button;
     //Selection des generateur
-    QLabel * u_char_label;
-    QLabel * l_char_label;
-    QLabel * d_char_label;
-    QLabel * s_char_label;
-    QLabel * p_char_label;
-    QLabel * wdb_char_label;
-    QLabel * homo_gen_label;
+    QSLabel * u_char_label;
+    QSLabel * l_char_label;
+    QSLabel * d_char_label;
+    QSLabel * s_char_label;
+    QSLabel * p_char_label;
+    QSLabel * wdb_char_label;
+    QSLabel * homo_gen_label;
     //
     QCheckBox * u_char_check;
     QCheckBox * l_char_check;
@@ -44,7 +45,7 @@ private:
      * @note If the one this the parameter in the function is null,
      *       the operation will be abort and nothing append
      */
-    void connect_label_to_check(QLabel *label, QCheckBox *check);
+    void connect_label_to_check(QSLabel *label, QCheckBox *check);
 
 public:
     ConfigBox(QWidget *parent = nullptr);

@@ -7,13 +7,13 @@ ConfigBox::ConfigBox(QWidget * parent):
     configs_widget(new QWidget()),
     configs_grid(new QGridLayout()),
     valid_button(new QPushButton()),
-    u_char_label(new QLabel()),
-    l_char_label(new QLabel()),
-    d_char_label(new QLabel()),
-    s_char_label(new QLabel()),
-    p_char_label(new QLabel()),
-    wdb_char_label(new QLabel()),
-    homo_gen_label(new QLabel()),
+    u_char_label(new QSLabel()),
+    l_char_label(new QSLabel()),
+    d_char_label(new QSLabel()),
+    s_char_label(new QSLabel()),
+    p_char_label(new QSLabel()),
+    wdb_char_label(new QSLabel()),
+    homo_gen_label(new QSLabel()),
     u_char_check(new QCheckBox()),
     l_char_check(new QCheckBox()),
     d_char_check(new QCheckBox()),
@@ -55,15 +55,25 @@ ConfigBox::ConfigBox(QWidget * parent):
     
     //Connect Signals
     QObject::connect(valid_button, &QPushButton::clicked, [&](){
-        qDebug() << "G_Button clicked";
         emit generate_bt_clicked(this);
     });
 
     //Lier chaque label a sont checkbox
+    connect_label_to_check(u_char_label, u_char_check);
+    connect_label_to_check(l_char_label, l_char_check);
+    connect_label_to_check(d_char_label, d_char_check);
+    connect_label_to_check(s_char_label, s_char_check);
+    connect_label_to_check(p_char_label, p_char_check);
+    connect_label_to_check(wdb_char_label, wdb_char_check);
+    connect_label_to_check(homo_gen_label, homo_gen_check);
+    
 }
 
-
-void ConfigBox::connect_label_to_check(QLabel *label, QCheckBox *check){
+void ConfigBox::connect_label_to_check(QSLabel *label, QCheckBox *check){
     if(!label || !check) return;
-    
+    QObject::connect(label, &QSLabel::slabel_clicked, [&]() mutable{
+        auto state = check->checkState();
+        if(!state) check->setCheckState(Qt::CheckState::Unchecked);
+        else check-> setCheckState(Qt::CheckState::Checked);
+    });
 }
