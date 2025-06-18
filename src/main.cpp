@@ -26,7 +26,7 @@ int main(int argc, char* argv[]){
     {
         cout << geny.generate_secure_passw(10, gen_list, false) << endl;
         cout << geny.generate_unique_uid(5, 5, " |=| ", gen_list, false) << endl;
-        cout << geny.generate_personal_pseudo("AkidoLD", 10, 10, gen_list, true) << endl;
+        cout << geny.generate_personal_pseudo("AkidoLD", 20, 20, gen_list, false, true) << endl;
         cout <<endl << endl;
         /* code */
     }

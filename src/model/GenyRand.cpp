@@ -103,7 +103,7 @@ string GenyRand::generate_unique_uid(
         }
     }
 
-    return join_randomly(gen_uid, s_bloc);
+    return join_randomly(gen_uid, homogen,s_bloc);
 }
 
 
@@ -123,6 +123,7 @@ const string GenyRand::generate_personal_pseudo(
         const size_t max_l,
         const size_t min_l,
         vector<generator> generators,
+        const bool homo_gen,
         const bool r_sample
 ){
     if(generators.empty())
@@ -152,7 +153,7 @@ const string GenyRand::generate_personal_pseudo(
         g_tokens.push_back(g_token);
         g_tokens_l += g_token.length();
     }
-    g_pseudo = join_randomly(move(g_tokens));
+    g_pseudo = join_randomly(move(g_tokens), homo_gen);
     g_pseudo.resize(g_pseudo_l);
     //
     return g_pseudo;
