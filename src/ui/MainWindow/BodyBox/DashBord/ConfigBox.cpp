@@ -184,7 +184,6 @@ QWidgetList ConfigBox::get_enabled_generators(){
     if(d_char_check->isChecked()) check_list.append(d_char_check) ;
     if(s_char_check->isChecked()) check_list.append(s_char_check) ;
     if(p_char_check->isChecked()) check_list.append(p_char_check) ;
-    if(wdb_char_check->isChecked()) check_list.append(wdb_char_check) ;
     //
     return check_list;
 }

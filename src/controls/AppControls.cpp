@@ -91,6 +91,7 @@ const QStringList AppControls::generate_random_password(PasswConfig *passwConfig
     while(tokens.size() < (qsizetype) passw_n) tokens.append(genyModel->generate_secure_passw(
         passw_l,
         generators,
+        w_db_char,
         g_homo
     ).c_str());
     //
@@ -132,6 +133,7 @@ const QStringList AppControls::generate_random_uid(UidConfig *uidConfig){
         l_bloc,
         s_bloc,
         generators,
+        w_db_char,
         g_homo
     ).c_str());
     //
@@ -175,6 +177,7 @@ const QStringList AppControls::generate_random_pseudo(PseudoConfig *pseudoConfig
         l_pseudo_max,
         l_pseudo_min,
         generators,
+        w_db_char,
         g_homo,
         r_sample
     ).c_str());
