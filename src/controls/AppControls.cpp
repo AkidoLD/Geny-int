@@ -80,8 +80,7 @@ const QStringList AppControls::generate_random_password(PasswConfig *passwConfig
         c_u_alpha,
         c_l_alpha,
         c_s_char,
-        c_p_char,
-        w_db_char
+        c_p_char
     );
     if(generators.empty()){
         on_config_change(passwConfig);
@@ -120,8 +119,7 @@ const QStringList AppControls::generate_random_uid(UidConfig *uidConfig){
         c_u_alpha,
         c_l_alpha,
         c_s_char,
-        c_p_char,
-        w_db_char
+        c_p_char
     );
     if(generators.empty()){
         on_config_change(uidConfig);
@@ -163,8 +161,7 @@ const QStringList AppControls::generate_random_pseudo(PseudoConfig *pseudoConfig
         c_u_alpha,
         c_l_alpha,
         c_s_char,
-        c_p_char,
-        w_db_char
+        c_p_char
     );
     //
     if(generators.empty()){

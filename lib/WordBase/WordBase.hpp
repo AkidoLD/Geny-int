@@ -10,7 +10,7 @@
 
 using namespace std;
 
-const string DEFAUT_DATABASE = "word_database.dat";
+const string DEFAUT_DATABASE = "data/wordbase.dat";
 /**
  * @brief Storage and manage Word List
  * @details This class contains methode and attribut who allows to manages a database of word
@@ -26,38 +26,62 @@ private:
     /**
      * @brief The database file directory
      */
-    const string database; 
+    const string datafile; 
 
     /**
      * @brief The state of the database
      */
-    bool is_valid = false;
+    bool is_valid ;
 
 public:
     //Constructeur
-    WordBase(const string database = DEFAUT_DATABASE);
+    WordBase();
+    WordBase(const string &datafile);
 
     //Destructeur
     ~WordBase();
 
     //Methodes
 private:
-    bool create_file_if(const string file);
+    bool create_file_if(const string &file);
     
 public:
+    /**
+     * @brief Say if the wordbase is available
+     * @details Thus methods is use to check the status of a wordbase
+     * @return True is the avaible and false if not
+     */
+    bool is_avaibable()const {return is_valid;}
+
     /**
      * @brief Load file database word
      * @details This methode allows to load the word database from the `database` or specifie `database` to the `wordList`
      * @return True if the loading is success or false if not
      */
-    bool load_database(string database = "");
+    bool load_database();
 
     /**
      * @brief Save database in file
      * @details This methode allows to save the database in a specific file
      * @return True if the saving is success or false if not
      */
-    bool save_database(string database = "");
+    bool save_database();
+
+    /**
+     * @brief Load database from other base
+     * @details This method allow to load data from another datafile
+     * @param[in] datafile The datafile path
+     * @return True if the operation is successful or false if not
+     */
+    bool import_data_from(const string &datafile);
+
+    /**
+     * @brief Save data from other datafile
+     * @details This method allow to save data in speficifique datafile
+     * @param[in] datafile The data file where the data was save
+     * @return True if the operation is successful or false if not
+     */
+    bool export_data_on(const string &datafile);
 
     /**
      * @brief Get a set of word
@@ -121,4 +145,12 @@ public:
      * @exception invalid_arguments if the word in parameter is empty
      */
     bool append_word(const string &word);
+
+    /**
+     * @brief Create a directory if don't exist
+     * @details This method allow to create a directory if it don't exist
+     * @param[in] directory The directory to create
+     * @exception runtime_error If the creation failed
+     */
+    void create_file_directory(string const &directoy);
 };

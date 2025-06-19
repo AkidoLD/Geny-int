@@ -1,58 +1,68 @@
 #include "model/GenyRand.hpp"
 
-GenyRand::GenyRand(){
-    if(wordbase.load_database() == false){
-        cerr << "Erreur lors du chargement des donnees de l'app" << endl;
-    }   
-    wordbase.save_database();
-}
+const unordered_map<generator, function<char()>> GenyRand::map_generator{
+    {generator::c_digit , gen_c_digit},
+    {generator::c_u_alpha , gen_c_u_alpha},
+    {generator::c_l_alpha , gen_c_l_alpha},
+    {generator::c_s_char , gen_c_s_char},
+    {generator::c_p_char , gen_c_p_char}
+};
 
-GenyRand::GenyRand(const string load_database):
-    wordbase(load_database)
+GenyRand::GenyRand():
+    wordbase()
 {
-    if(wordbase.load_database() == false){
+    if(!wordbase.load_database()){
         cerr << "Erreur lors du chargement des donnees de l'app" << endl;
     }   
     wordbase.save_database();
 }
 
-string const GenyRand::random_geny(const vector<generator> &gen_list, size_t gchar_l){
+GenyRand::GenyRand(const string &load_base):
+    wordbase(load_base)
+{
+    if(!wordbase.load_database()){
+        cerr << "Erreur lors du chargement des donnees de l'app" << endl;
+    }   
+    wordbase.save_database();
+}
+
+char GenyRand::gen_c_digit(){
+    return '0' + Random::gen_rand_unit_number();
+};
+
+char GenyRand::gen_c_u_alpha(){
+    return Random::gen_rand_letter(true);
+};
+
+char GenyRand::gen_c_l_alpha(){
+    return Random::gen_rand_letter();
+};
+
+char GenyRand::gen_c_s_char(){
+    return Random::gen_rand_spe_char();
+};
+
+char GenyRand::gen_c_p_char(){
+    return Random::gen_rand_spe_char(true);
+};
+
+string const GenyRand::random_geny(const vector<generator> &gen_list, size_t gchar_l, bool wdb_char){
     if(gen_list.empty())
         throw invalid_argument("La generator list ne peut etre vide");
     //
     if(gchar_l <= 0)
         throw invalid_argument("Le nombre de char genere ne peut etre null");
     //Choisir le generateur a utiliser
-    auto _generator = gen_list[generate_rand_num(gen_list.size() - 1)];
+    if(wdb_char && !generate_rand_num(gen_list.size()))
+        return get_rand_str(gchar_l);
+    //
+    const auto _generator = gen_list[generate_rand_num(gen_list.size() - 1)];
     
     string gen_str = ""; //
-    
+
     //Etape generation de la chaine
     while(gen_str.length() < gchar_l){
-        switch (_generator)
-        {
-        case generator::c_digit:
-            gen_str += gen_c_digit();
-            break;
-        case generator::c_l_alpha:
-            gen_str += gen_c_l_alpha();
-            break;
-        case generator::c_u_alpha:
-            gen_str += gen_c_u_alpha();
-            break;
-        case generator::c_s_char:
-            gen_str += gen_c_s_char();
-            break;
-        case generator::c_p_char:
-            gen_str += gen_c_p_char();
-            break;
-        case generator::w_db_char:
-            gen_str += get_rand_str(gchar_l);
-            break;
-        default:
-            throw invalid_argument("Le un des generateur passe ne parametre est invalide");
-            break;
-        }
+        gen_str += map_generator.at(_generator)();
     }
     return gen_str;
 }
@@ -60,6 +70,7 @@ string const GenyRand::random_geny(const vector<generator> &gen_list, size_t gch
 string GenyRand::generate_secure_passw(
     const size_t lenght,
     vector<generator> &generators,
+    const bool wdb_chars,
     const bool homogen
 ){
     //Verification des parametre en entre
@@ -67,12 +78,13 @@ string GenyRand::generate_secure_passw(
     if(generators.empty())
         throw invalid_argument("Le vector de generator ne peut etre vide");
     //
-    size_t homo_coef = homogen ? 1 : (size_t) lenght/ generators.size(); //Coefficiant d'homogenehite
+    size_t homo_coef = lenght * M_1_PI; //Coefficiant d'homogenehite
     //
     string gen_passw = "";
 
     while(gen_passw.length() < lenght){
-        gen_passw += random_geny(generators, homo_coef);
+        auto n_gen = homogen ? homo_coef : generate_rand_num(lenght - gen_passw.size(), 1);
+        gen_passw += random_geny(generators, n_gen , wdb_chars);
     }
     gen_passw.resize(lenght);
     //
@@ -84,6 +96,7 @@ string GenyRand::generate_unique_uid(
     const size_t l_bloc,
     const string s_bloc,
     vector<generator> &generators,
+    const bool wdb_chars,
     const bool homogen
 ) {
     if (generators.empty())
@@ -98,10 +111,10 @@ string GenyRand::generate_unique_uid(
 
     // Génération des blocs
     while (gen_uid.size() < n_bloc) {
-        bloc += random_geny(generators, homo_coef);
+        bloc += random_geny(generators, homo_coef, wdb_chars);
 
         if (bloc.size() >= l_bloc) {
-            bloc.resize(l_bloc); // Tronque au cas où on dépasse
+            bloc.resize(l_bloc); 
             gen_uid.push_back(std::move(bloc));
             bloc.clear();
         }
@@ -127,6 +140,7 @@ const string GenyRand::generate_personal_pseudo(
         const size_t max_l,
         const size_t min_l,
         vector<generator> generators,
+        const bool wdb_chars,
         const bool homo_gen,
         const bool r_sample
 ){
@@ -152,7 +166,7 @@ const string GenyRand::generate_personal_pseudo(
 
     while(g_tokens_l < g_pseudo_l){
         size_t g_token_l = generate_rand_num((g_pseudo_l - g_tokens_l), 1);
-        string g_token = random_geny(generators, g_token_l);
+        string g_token = random_geny(generators, g_token_l, wdb_chars);
         if(g_token.empty()) continue;
         g_tokens.push_back(g_token);
         g_tokens_l += g_token.length();
@@ -163,13 +177,12 @@ const string GenyRand::generate_personal_pseudo(
     return g_pseudo;
 }
 
-vector<generator> GenyRand::make_generator_list(
+const vector<generator> GenyRand::make_generator_list(
         const bool c_digit,
         const bool c_u_alpha,
         const bool c_l_alpha,
         const bool c_s_char,
-        const bool c_p_char,
-        const bool w_db_char
+        const bool c_p_char
 ){
     vector<generator> generator_list;
     if(c_digit) generator_list.push_back(generator::c_digit);
@@ -177,7 +190,6 @@ vector<generator> GenyRand::make_generator_list(
     if(c_u_alpha) generator_list.push_back(generator::c_u_alpha);
     if(c_s_char) generator_list.push_back(generator::c_s_char);
     if(c_p_char) generator_list.push_back(generator::c_p_char);
-    if(w_db_char) generator_list.push_back(generator::w_db_char);
     //
     return generator_list;
 }
