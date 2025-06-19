@@ -13,8 +13,6 @@ endif()
 # Trouve Qt6 et son module Widgets
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-add_subdirectory(lib/RandomUtils)
-
 # Fichiers sources
 file(GLOB_RECURSE SRC src/*.cpp)
 file(GLOB_RECURSE HEADERS include/*.hpp)
@@ -29,4 +27,4 @@ target_include_directories(Geny-int PRIVATE ${CMAKE_SOURCE_DIR}/include)
 set_target_properties(Geny-int PROPERTIES AUTOMOC ON)
 
 # Lie Qt6::Widgets à ton exécutable
-target_link_libraries(Geny-int PRIVATE Qt6::Widgets RandomUtils)
+target_link_libraries(Geny-int PRIVATE Qt6::Widgets)
