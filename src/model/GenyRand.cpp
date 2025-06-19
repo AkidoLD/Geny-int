@@ -57,7 +57,11 @@ string const GenyRand::random_geny(const vector<generator> &gen_list, size_t gch
     return gen_str;
 }
 
-string GenyRand::generate_secure_passw(const size_t lenght, vector<generator> &generators, const bool homogen){
+string GenyRand::generate_secure_passw(
+    const size_t lenght,
+    vector<generator> &generators,
+    const bool homogen
+){
     //Verification des parametre en entre
     if(lenght == 0) return "";
     if(generators.empty())
@@ -82,12 +86,12 @@ string GenyRand::generate_unique_uid(
     vector<generator> &generators,
     const bool homogen
 ) {
+    if (generators.empty())
+        throw invalid_argument("La liste de générateurs ne peut être vide");
+    
     if (n_bloc == 0 || l_bloc == 0)
         return "";
-
-    if (generators.empty())
-        throw std::invalid_argument("La liste de générateurs ne peut être vide");
-
+    //
     const size_t homo_coef = homogen ? 1 : l_bloc;
     vector<string> gen_uid;
     string bloc;
@@ -130,7 +134,7 @@ const string GenyRand::generate_personal_pseudo(
         throw invalid_argument("La liste de generateur ne peux pas etre null");
     //
     if(!(min_l > 0 && min_l <= max_l))
-        throw invalid_argument("La taille taille minimal ne peux etre null et doit toujours etre inferieur a la taille maximal");
+        throw invalid_argument("La taille taille minimal ne peux etre null et doit toujours etre inferieur ou egale a la taille maximal");
     //
     if(r_sample and min_l < sample.size())
         throw range_error("Si l'echantillon est requis, la taille minimal ne peux etre inferieur a la taille de celui ci");
