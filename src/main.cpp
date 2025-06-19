@@ -1,33 +1,11 @@
 #include <iostream>
 #include <unordered_map>
+#include <cmath>
 #include "WordBase.hpp"
 #include "RandomUtils.hpp"
 #include "model/GenyRand.hpp"
-#include <filesystem>
-#include <functional>
 
 using namespace std;
-
-function<string()> f1 = []()->string{
-    return "Function 1";
-};
-function<string()> f2 = []()->string{
-    return "Function 2";
-};
-function<string()> f3 = []()->string{
-    return "Function 3";
-};
-function<string()> f4 = []()->string{
-    return "Function 4";
-};
-
-map<size_t, function<string()>> map_funct{
-    {1, f1},
-    {2, f2},
-    {3, f3},
-    {4, f4}
-};
-
 
 int main(int argc, char* argv[]){
     (void) argc; (void) argv;
@@ -42,10 +20,12 @@ int main(int argc, char* argv[]){
         generator::c_u_alpha,
         generator::c_digit,
         // generator::c_s_char,
-        //generator::w_db_char
     };
-    cout << map_funct[2]() << endl;
     //
-    // cout << geny.get_wordList() << endl;
+    auto generators = GenyRand::make_generator_list(1, 0, 0, 0, 0);
+    cout << geny.generate_secure_passw(20, generators, true, false) << endl;
+    cout << geny.generate_personal_pseudo("Akido", 10, 10, generators, true, false, false);
+    //cout << geny.get_wordList() << endl;
+
     return 0;
 }

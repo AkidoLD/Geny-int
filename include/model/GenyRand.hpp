@@ -5,6 +5,7 @@
 #include "RandomUtils.hpp" 
 #include "WordBase.hpp"
 #include <string>
+#include <functional>
 
 /**
  * @brief Enumation of all generator
@@ -24,8 +25,12 @@ class GenyRand : protected Random{
 private: 
     WordBase wordbase;
 
-public:
-    
+    /**
+     * @brief Map of generator
+     * @details This attribut is utils to easy get the correct generator
+     */
+    static const unordered_map<generator, function<char()>> map_generator;
+
 public:
     GenyRand();
     GenyRand(const string &load_database);
@@ -39,7 +44,7 @@ public:
      * @param[in] gen_list Generator list who been used
      * @return The random char 
      */
-    string const random_geny(const vector<generator> &gen_list, size_t time = 1);
+    string const random_geny(const vector<generator> &gen_list, size_t time = 1, bool wdb_char = true);
 
     //Bon, creation un suite de fonction specialise de generation pour pouvoir utiliser un map
     /**
@@ -47,35 +52,35 @@ public:
      * @details This method allow to generate a `c_digit`
      * @return A `c_digit`
      */
-    char gen_c_digit(){ return '0' + gen_rand_unit_number();}
+    static char gen_c_digit();
 
     /**
      * @brief Generator of `c_u_alpha`
      * @details This method allow to generate a `c_u_alpha`
      * @return A `c_u_alpha`
      */
-    char gen_c_u_alpha(){ return gen_rand_letter(true);}
+    static char gen_c_u_alpha();
 
     /**
      * @brief Generator of `c_l_alpha`
      * @details This method allow to generate a `c_l_alpha`
      * @return A `c_l_alpha`
      */
-    char gen_c_l_alpha(){ return gen_rand_letter();}
+    static char gen_c_l_alpha();
 
     /**
      * @brief Generator of turn A `c_s_char`
      * @details This method allow to generate a `turn A `c_s_char`
      * @return A `turn A `c_s_char`
      */
-    char gen_c_s_char(){ return gen_rand_spe_char();}
+    static char gen_c_s_char();
 
     /**
      * @brief Generator of `c_p_char`
      * @details This method allow to generate a `c_p_char`
      * @return A `c_p_char`
      */
-    char gen_c_p_char(){ return gen_rand_spe_char(true);}
+    static char gen_c_p_char();
 
     /**
      * @brief Get random string in `wordbase`
@@ -98,7 +103,8 @@ public:
      * */
     string generate_secure_passw(
         const size_t lenght, 
-        vector<generator> &generators, 
+        vector<generator> &generators,
+        const bool wdb_chars = false,
         const bool homogen = true
     );
 
@@ -120,6 +126,7 @@ public:
         const size_t l_bloc,
         const string s_bloc,
         vector<generator> &generators,
+        const bool wdb_chars,
         const bool homogen = true
     );
 
@@ -140,6 +147,7 @@ public:
         const size_t max_l,
         const size_t min_l,
         vector<generator> generators,
+        const bool wdb_chars = false,
         const bool homo_gen = true,
         const bool r_sample = false
     );
@@ -152,15 +160,13 @@ public:
      * @param[in] c_l_alpha If true the generator will be added to the generators list
      * @param[in] c_s_char If true the generator will be added to the generators list
      * @param[in] c_p_char If true the generator will be added to the generators list
-     * @param[in] w_db_char If true the generator will be added to the generators list
      * @return A correct generator list
      */
-    vector<generator> make_generator_list(
+    static const vector<generator> make_generator_list(
         const bool c_digit,
         const bool c_u_alpha,
         const bool c_l_alpha,
         const bool c_s_char,
-        const bool c_p_char,
-        const bool w_db_char
+        const bool c_p_char
     ); 
 };
