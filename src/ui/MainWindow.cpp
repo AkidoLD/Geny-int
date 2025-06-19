@@ -22,6 +22,7 @@ MainWindow::MainWindow(const QString title, QWidget * parent):
     //
     layout->setObjectName("main-window-layout");
     layout->setContentsMargins(10, 10 ,10 ,10);
+    layout->setSpacing(0);
     layout->addWidget(headerBox, 0, Qt::AlignTop);
     layout->addWidget(bodyBox, 1);
     layout->addWidget(footerBox, 0, Qt::AlignBottom);
