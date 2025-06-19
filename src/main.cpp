@@ -3,8 +3,31 @@
 #include "WordBase.hpp"
 #include "RandomUtils.hpp"
 #include "model/GenyRand.hpp"
+#include <filesystem>
+#include <functional>
 
 using namespace std;
+
+function<string()> f1 = []()->string{
+    return "Function 1";
+};
+function<string()> f2 = []()->string{
+    return "Function 2";
+};
+function<string()> f3 = []()->string{
+    return "Function 3";
+};
+function<string()> f4 = []()->string{
+    return "Function 4";
+};
+
+map<size_t, function<string()>> map_funct{
+    {1, f1},
+    {2, f2},
+    {3, f3},
+    {4, f4}
+};
+
 
 int main(int argc, char* argv[]){
     (void) argc; (void) argv;
@@ -14,22 +37,15 @@ int main(int argc, char* argv[]){
     // wordbase.save_database();
     // cout << "Vous avez actuellement "<<wordbase.number_of_word() << " mots dans votre base";
 
-    GenyRand geny("/home/akido-ld/Documents/Memo/Guide pour Github et Git.txt");
+    GenyRand geny{};
     vector<generator> gen_list{
         generator::c_u_alpha,
         generator::c_digit,
         // generator::c_s_char,
-        generator::w_db_char
+        //generator::w_db_char
     };
+    cout << map_funct[2]() << endl;
     //
-    for (size_t i = 0; i < 100; i++)
-    {
-        cout << geny.generate_secure_passw(10, gen_list, false) << endl;
-        cout << geny.generate_unique_uid(5, 5, " |=| ", gen_list, false) << endl;
-        cout << geny.generate_personal_pseudo("AkidoLD", 20, 20, gen_list, false, true) << endl;
-        cout <<endl << endl;
-        /* code */
-    }
-
+    // cout << geny.get_wordList() << endl;
     return 0;
 }

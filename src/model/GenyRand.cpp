@@ -1,16 +1,18 @@
 #include "model/GenyRand.hpp"
 
-GenyRand::GenyRand(){
-    if(wordbase.load_database() == false){
+GenyRand::GenyRand():
+    wordbase()
+{
+    if(!wordbase.load_database()){
         cerr << "Erreur lors du chargement des donnees de l'app" << endl;
     }   
     wordbase.save_database();
 }
 
-GenyRand::GenyRand(const string load_database):
-    wordbase(load_database)
+GenyRand::GenyRand(const string &load_base):
+    wordbase(load_base)
 {
-    if(wordbase.load_database() == false){
+    if(!wordbase.load_database()){
         cerr << "Erreur lors du chargement des donnees de l'app" << endl;
     }   
     wordbase.save_database();
