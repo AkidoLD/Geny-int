@@ -31,12 +31,20 @@ AppControls::AppControls(MainWindow * genyView, GenyRand * genyModel, QObject * 
     genyModel(genyModel)
 {
     auto & dashbord = genyView->bodyBox->get_dashbord();
+    display_db_size(); //Afficher le nombre de mot de la base
     QObject::connect(&dashbord, &DashBord::generate_bt_clicked, this, &AppControls::on_generated_bt_clicked);
     QObject::connect(&dashbord, &DashBord::config_change, this, &AppControls::on_config_change);
     QObject::connect(this, &AppControls::error_occured, this, &AppControls::on_error_occured);
     QObject::connect(this, &AppControls::no_error_occured, this, &AppControls::on_no_error_occured);
     //
 
+}
+
+void AppControls::display_db_size(){
+    auto nbr_mots = genyModel->get_wordList().number_of_word();
+    ostringstream message; 
+    message << "<strong>Base de mots : <strong style='color:rgb(71, 85, 207)'> " << nbr_mots << "</strong> mots</strong>";
+    genyView->footerBox->set_nbr_words_text(message.str().c_str());
 }
 
 void AppControls::on_generated_bt_clicked(ConfigBox *conf, ResultBox *result){

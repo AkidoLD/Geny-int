@@ -56,12 +56,13 @@ public:
     static const QMap<PseudoError, QString> PseudoErrorMap;
 
 //Methodes
-    private:
+private:
     bool verify_generator(ConfigBox *);
     //
     bool verify_passw_conf(PasswConfig *);
     bool verify_pseudo_conf(PseudoConfig *);
     bool verify_uid_config(UidConfig *);
+    void display_db_size();
 
 public:
     AppControls(MainWindow * genyview, GenyRand * genyModel, QObject * parent = nullptr);
