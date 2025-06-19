@@ -9,7 +9,9 @@ class FooterBox : public QWidget {
 private:
     QHBoxLayout * hblayout;
     QLabel * credits; 
-
+    //
+    static const QString w_style;
+    
 //Methodes
 public:
     FooterBox(QWidget * parent = nullptr);

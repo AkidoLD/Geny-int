@@ -6,11 +6,15 @@
 #include "ui/MainWindow/HeaderBox.hpp"
 #include "ui/MainWindow/BodyBox.hpp"
 #include "ui/MainWindow/FooterBox.hpp"
+
 class MainWindow : public QMainWindow{
 //Attributs
 private:
     QWidget * widget;
     QVBoxLayout * layout;
+    const static QString w_style;
+    
+public:
     HeaderBox * headerBox; 
     BodyBox * bodyBox;
     FooterBox * footerBox;

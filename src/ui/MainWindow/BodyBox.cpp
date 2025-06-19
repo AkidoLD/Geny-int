@@ -19,3 +19,22 @@ BodyBox::BodyBox(QWidget * parent):
     menu_stack->addWidget(dashBord);
     menu_stack->setCurrentWidget(dashBord);
 }
+
+const QString BodyBox::w_style{
+    R"(
+        #body-box{
+            margin: 0;
+            padding: 0;
+        }
+
+        #body-box #body-box-layout{
+            margin: 0;
+            padding: 0;
+        }
+
+        #body-box #body-box-menu-stack{
+            margin: 0;
+            padding: 0;
+        }
+    )"
+};
