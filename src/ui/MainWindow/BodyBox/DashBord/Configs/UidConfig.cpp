@@ -23,12 +23,18 @@ UidConfig::UidConfig(QWidget * parent):
     s_bloc_edit->setMaxLength(10);
     s_bloc_edit->setPlaceholderText("Separateur ici...");
     n_uid_spin->setMaximum(1000);
+
+    //Default values
+    n_bloc_spin->setValue(4);
+    l_bloc_spin->setValue(4);
+    n_uid_spin->setValue(10);
+    s_bloc_edit->setText("-");
     //Row 0
-    configs_grid->addWidget(l_bloc_label, 0, 0, 1, 1);
-    configs_grid->addWidget(l_bloc_spin, 0, 1, 1, 3);
+    configs_grid->addWidget(n_bloc_label, 0, 0, 1, 1);
+    configs_grid->addWidget(n_bloc_spin, 0, 1, 1, 3);
     //
-    configs_grid->addWidget(n_bloc_label, 0, 4, 1, 1);
-    configs_grid->addWidget(n_bloc_spin, 0, 5, 1, 3);
+    configs_grid->addWidget(l_bloc_label, 0, 4, 1, 1);
+    configs_grid->addWidget(l_bloc_spin, 0, 5, 1, 3);
 
     //Row 1
     configs_grid->addWidget(s_bloc_label, 1, 0, 1, 1);
@@ -61,5 +67,20 @@ UidConfig::UidConfig(QWidget * parent):
     //
     configs_grid->addWidget(wdb_char_label, 5, 4, 1, 3, Qt::AlignLeft);
     configs_grid->addWidget(wdb_char_check, 5, 7, 1, 1, Qt::AlignRight);
-    //
+    
+    //Connection des signaux de verification
+    QObject::connect(n_bloc_spin, &QSpinBox::valueChanged, [&](){
+        emit config_change(this);
+    });
+
+    QObject::connect(l_bloc_spin, &QSpinBox::valueChanged, [&](){
+        emit config_change(this);
+    });
+    QObject::connect(n_uid_spin, &QSpinBox::valueChanged, [&](){
+        emit config_change(this);
+    });
+    QObject::connect(s_bloc_edit, &QLineEdit::textChanged, [&](){
+        emit config_change(this);
+    });
+
 }

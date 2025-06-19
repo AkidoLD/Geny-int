@@ -10,6 +10,9 @@
 
 class PasswordPack : public QObject{
     Q_OBJECT
+private:
+    static const QString  w_style;
+
 public:
     PasswConfig * passwConf;
     ResultBox * resultBox;
@@ -20,10 +23,14 @@ public:
 signals:
     void display_bt_clicked(ConfigBox *, ResultBox*);
     void generate_bt_clicked(ConfigBox *, ResultBox*);
+    void config_change(ConfigBox *);
 } ;
 
 class UidPack : public QObject{
     Q_OBJECT
+private:
+    static const QString  w_style;
+
 public:
     UidConfig * uidConf;
     ResultBox * resultBox;
@@ -33,10 +40,14 @@ public:
 signals:
     void display_bt_clicked(ConfigBox *, ResultBox*);
     void generate_bt_clicked(ConfigBox *, ResultBox*);
+    void config_change(ConfigBox *);
 };
 
 class PseudoPack : public QObject{
     Q_OBJECT
+private:
+    static const QString  w_style;
+
 public:
     PseudoConfig * pseudoConf;
     ResultBox * resultBox;
@@ -47,6 +58,7 @@ public:
 signals:
     void display_bt_clicked(ConfigBox *, ResultBox*);
     void generate_bt_clicked(ConfigBox *, ResultBox*);
+    void config_change(ConfigBox *);
 
 };
 
@@ -62,6 +74,8 @@ private:
     QWidget * switchStackWidget;
     QVBoxLayout * switchStackLayout;
     //
+    static const QString  w_style;
+    
 public :
     PasswordPack * passwPack;
     UidPack * uidPack;
@@ -75,8 +89,10 @@ public:
 private slots:
     void on_display_bt_clicked(ConfigBox *, ResultBox *);
     void on_generate_signal_emit(ConfigBox *, ResultBox *);
+    void on_change_config(ConfigBox *);
 
 signals:
     void generate_bt_clicked(ConfigBox *, ResultBox *);
+    void config_change(ConfigBox *);
 
 };

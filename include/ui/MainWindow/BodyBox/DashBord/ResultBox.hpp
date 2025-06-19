@@ -16,6 +16,8 @@ private:
     QScrollArea * result_scroll;
     QListWidget * result_list;
     QLabel * result_title;
+    //
+    static const QString w_style;
 
 //Methodes
 public:

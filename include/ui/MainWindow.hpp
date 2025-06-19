@@ -12,6 +12,7 @@ class MainWindow : public QMainWindow{
 private:
     QWidget * widget;
     QVBoxLayout * layout;
+    const static QString w_style;
     
 public:
     HeaderBox * headerBox; 

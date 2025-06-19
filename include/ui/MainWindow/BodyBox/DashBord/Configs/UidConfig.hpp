@@ -10,6 +10,7 @@
 
 class UidConfig : public ConfigBox{
     Q_OBJECT
+    using ConfigBox::ConfigBox;
 //Attributs
 private:
     QLabel * n_bloc_label;

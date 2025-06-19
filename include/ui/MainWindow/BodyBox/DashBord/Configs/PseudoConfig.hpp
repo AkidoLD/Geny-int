@@ -7,25 +7,28 @@
 #include <QSpinBox>
 #include <QCheckBox>
 #include "ui/MainWindow/BodyBox/DashBord/ConfigBox.hpp"
+#include "ui/QSCheckBox.hpp"
+#include "ui/QSLabel.hpp"
 
 class PseudoConfig : public ConfigBox{
     Q_OBJECT
+    using ConfigBox::ConfigBox;
 //Attributs
 private:
-    QLabel * l_pseudo_max_label;
+    QSLabel * l_pseudo_max_label;
     QSpinBox * l_pseudo_max_spin;
     //
-    QLabel * l_pseudo_min_label;
+    QSLabel * l_pseudo_min_label;
     QSpinBox * l_pseudo_min_spin;
     //
-    QLabel * n_pseudo_label;
+    QSLabel * n_pseudo_label;
     QSpinBox * n_pseudo_spin;
     //
-    QLabel * sample_label;
+    QSLabel * sample_label;
     QLineEdit * sample_edit;
     //
-    QLabel * r_sample_label;
-    QCheckBox * r_sample_check;
+    QSLabel * r_sample_label;
+    QSCheckBox * r_sample_check;
 
 //Methodes
 public:

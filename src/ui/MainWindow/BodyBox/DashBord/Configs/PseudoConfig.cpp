@@ -2,16 +2,16 @@
 
 PseudoConfig::PseudoConfig(QWidget * parent):
     ConfigBox(parent),
-    l_pseudo_max_label(new QLabel()),
+    l_pseudo_max_label(new QSLabel()),
     l_pseudo_max_spin(new QSpinBox()),
-    l_pseudo_min_label(new QLabel()),
+    l_pseudo_min_label(new QSLabel()),
     l_pseudo_min_spin(new QSpinBox()),
-    n_pseudo_label(new QLabel()),
+    n_pseudo_label(new QSLabel()),
     n_pseudo_spin(new QSpinBox()),
-    sample_label(new QLabel()),
+    sample_label(new QSLabel()),
     sample_edit(new QLineEdit()),
-    r_sample_label(new QLabel()),
-    r_sample_check(new QCheckBox())
+    r_sample_label(new QSLabel()),
+    r_sample_check(new QSCheckBox())
 {
     mode_name->setText("Geny Pseudo");
     //
@@ -25,8 +25,14 @@ PseudoConfig::PseudoConfig(QWidget * parent):
     l_pseudo_min_spin->setMaximum(9999);
     n_pseudo_spin->setMaximum(1000);
     sample_edit->setMaxLength(50);
-    sample_edit->setPlaceholderText("Echantillon ici ...");
-    //
+    sample_edit->setPlaceholderText("Echantillon ici...");
+    
+    //Default values
+    l_pseudo_max_spin->setValue(10);
+    l_pseudo_min_spin->setValue(10);
+    n_pseudo_spin->setValue(10);
+    sample_edit->setText("");
+    
     //Row 0
     configs_grid->addWidget(l_pseudo_max_label, 0, 0, 1, 1, Qt::AlignLeft);
     configs_grid->addWidget(l_pseudo_max_spin, 0, 1, 1, 3);
@@ -68,5 +74,24 @@ PseudoConfig::PseudoConfig(QWidget * parent):
     //
     configs_grid->addWidget(p_char_label, 5, 4, 1, 3, Qt::AlignLeft);
     configs_grid->addWidget(p_char_check, 5, 7, 1, 1, Qt::AlignRight);
-    
+    //
+    connect_label_to_check(r_sample_label,r_sample_check);
+
+    //Connection des signaux de verification
+    QObject::connect(l_pseudo_max_spin, &QSpinBox::valueChanged, [&](){
+        emit config_change(this);
+    });
+    QObject::connect(l_pseudo_min_spin, &QSpinBox::valueChanged, [&](){
+        emit config_change(this);
+    });
+    QObject::connect(n_pseudo_spin, &QSpinBox::valueChanged, [&](){
+        emit config_change(this);
+    });
+    QObject::connect(sample_edit, &QLineEdit::textChanged, [&](){
+        emit config_change(this);
+    });
+    QObject::connect(r_sample_check, &QSCheckBox::stateChanged, [&](){
+        emit config_change(this);
+    });
+
 }

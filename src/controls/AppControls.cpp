@@ -1,12 +1,42 @@
 #include "controls/AppControls.hpp"
 
+const QMap<ConfigError, QString> AppControls::ConfigErrorMap{
+    {ConfigError::NoGenerator, "Aucun generateur selectionne"},
+    {ConfigError::OnlyOneGenerator, "Vous devez avoir selectionne au moins un generateur"}
+};
+
+const QMap<PasswError, QString> AppControls::PasswErrorMap{
+    {PasswError::NullLenght, "La taille de votre mot de passe ne peut pas etre null"},
+    {PasswError::NullNumber, "Vous devez generer au moins un Mot de passe"}
+};
+
+const QMap<UidError, QString> AppControls::UidErrorMap{
+    {UidError::NullNumber, "Vous devez generer au moins un UID"},
+    {UidError::NullLenghtBloc, "La taille d'un bloc ne peux pas etre null"},
+    {UidError::NullNumberBloc, "L'UID genere doit avoir au moins 1 bloc"}
+};
+
+const QMap<PseudoError, QString> AppControls::PseudoErrorMap{
+    {PseudoError::MaxLessThanMin, "La taille maximale est inferieur a la minimale"},
+    {PseudoError::NullMaxLenght, "La taille maximale ne peux pas etre null"},
+    {PseudoError::NullMinLenght, "La taille minimale ne peux pas etre null"},
+    {PseudoError::NullNumber, "Le nombre de pseudo genere ne peux pas etre null"},
+    {PseudoError::SampleRequired, "Un echantillons est requis pour la generation"}
+};
+
+
 AppControls::AppControls(MainWindow * genyView, GenyRand * genyModel, QObject * parent):
     QObject(parent),
     genyView(genyView),
     genyModel(genyModel)
 {
-    auto dashbord = genyView->bodyBox->get_dashbord();
-    if(dashbord != nullptr) QObject::connect(dashbord, &DashBord::generate_bt_clicked, this, &AppControls::on_generated_bt_clicked);
+    auto & dashbord = genyView->bodyBox->get_dashbord();
+    QObject::connect(&dashbord, &DashBord::generate_bt_clicked, this, &AppControls::on_generated_bt_clicked);
+    QObject::connect(&dashbord, &DashBord::config_change, this, &AppControls::on_config_change);
+    QObject::connect(this, &AppControls::error_occured, this, &AppControls::on_error_occured);
+    QObject::connect(this, &AppControls::no_error_occured, this, &AppControls::on_no_error_occured);
+    //
+
 }
 
 void AppControls::on_generated_bt_clicked(ConfigBox *conf, ResultBox *result){
@@ -53,7 +83,10 @@ const QStringList AppControls::generate_random_password(PasswConfig *passwConfig
         c_p_char,
         w_db_char
     );
-
+    if(generators.empty()){
+        on_config_change(passwConfig);
+        return {};
+    }
     //Generer les tokens
     QStringList tokens {};
     while(tokens.size() < (qsizetype) passw_n) tokens.append(genyModel->generate_secure_passw(
@@ -90,6 +123,10 @@ const QStringList AppControls::generate_random_uid(UidConfig *uidConfig){
         c_p_char,
         w_db_char
     );
+    if(generators.empty()){
+        on_config_change(uidConfig);
+        return {};
+    }
     //Generer les tokens
     QStringList tokens {};
     while(tokens.size() < (qsizetype) n_uid) tokens.append(genyModel->generate_unique_uid(
@@ -129,6 +166,11 @@ const QStringList AppControls::generate_random_pseudo(PseudoConfig *pseudoConfig
         c_p_char,
         w_db_char
     );
+    //
+    if(generators.empty()){
+        on_config_change(pseudoConfig);
+        return {};
+    }
     //Generer les tokens
     QStringList tokens {};
     while(tokens.size() < (qsizetype) n_pseudo) tokens.append(genyModel->generate_personal_pseudo(
@@ -139,6 +181,139 @@ const QStringList AppControls::generate_random_pseudo(PseudoConfig *pseudoConfig
         g_homo,
         r_sample
     ).c_str());
-    qDebug() << tokens.at(0);
+    //
     return tokens;
+}
+
+void AppControls::on_config_change(ConfigBox *conf_box){
+    if(!conf_box) return ;
+    qDebug() << "Verification en cours";
+    bool error_occured = false;
+    error_occured |= verify_generator(conf_box);
+    //
+    if(auto passw_conf = qobject_cast<PasswConfig *>(conf_box))
+        error_occured |= verify_passw_conf(passw_conf);
+    else if(auto uid_conf = qobject_cast<UidConfig *>(conf_box))
+        error_occured |= verify_uid_config(uid_conf);
+    else if(auto pseudo_conf = qobject_cast<PseudoConfig *>(conf_box))
+        error_occured |= verify_pseudo_conf(pseudo_conf);
+
+    //Si aucune erreur n'est emise
+    if(!error_occured)
+        emit no_error_occured(conf_box);
+}   
+
+bool AppControls::verify_generator(ConfigBox *conf_box){
+    if(!conf_box) return true ;
+    //
+    auto check_list = conf_box->get_enabled_generators();
+    if(check_list.isEmpty()){
+        emit error_occured(conf_box, ConfigErrorMap[ConfigError::NoGenerator]);
+        return true;
+    }
+
+    if(check_list.size() == 1){
+        check_list.at(0)->setEnabled(false);
+        //emit error_occured(conf_box, ConfigErrorMap[ConfigError::OnlyOneGenerator]);
+        return false ;
+    }
+
+    //cas echeant
+    foreach(auto check, check_list) check->setEnabled(true);
+    return false;
+}
+
+bool AppControls::verify_passw_conf(PasswConfig *conf_box){
+    if(!conf_box) return true;
+    //
+    auto l_passw = conf_box->get_lenght_spin_value();
+    auto n_passw = conf_box->get_number_spin_value();
+    //
+    if(l_passw <= 0){
+        emit error_occured(conf_box, PasswErrorMap[PasswError::NullLenght]);
+        return true;
+    }
+    if( n_passw <= 0){
+        emit error_occured(conf_box, PasswErrorMap[PasswError::NullNumber]);
+        return true;
+    }
+
+    //Cas echeant
+    return false;
+}
+
+bool AppControls::verify_pseudo_conf(PseudoConfig *conf_box){
+    if(!conf_box) return true ;
+    //
+    auto l_pseudo_max = conf_box->get_l_pseudo_max_spin_value();
+    auto l_pseudo_min = conf_box->get_l_pseudo_min_spin_value();
+    auto n_pseudo = conf_box->get_n_pseudo_spin_value();
+    //
+    auto sample = conf_box->get_sample_edit_text();
+    auto r_sample = conf_box->get_r_sample_check_state();
+    //
+    if(l_pseudo_max <= 0){
+        emit error_occured(conf_box, PseudoErrorMap[PseudoError::NullMaxLenght]);
+        return true;
+    }
+    //
+    if(l_pseudo_min <= 0){
+        emit error_occured(conf_box, PseudoErrorMap[PseudoError::NullMinLenght]);
+        return true;
+    }
+    //
+    if(n_pseudo <= 0){
+        emit error_occured(conf_box, PseudoErrorMap[PseudoError::NullNumber]);
+        return true;
+    }
+    //
+    if(l_pseudo_max < l_pseudo_min){
+        emit error_occured(conf_box, PseudoErrorMap[PseudoError::MaxLessThanMin]);
+        return true;
+    }
+    //
+    if(r_sample && sample.isEmpty() ){
+        emit error_occured(conf_box, PseudoErrorMap[PseudoError::SampleRequired]);
+        return true;
+    }
+    //Cas echeant
+    return false;
+}
+
+bool AppControls::verify_uid_config(UidConfig *conf_box){
+    if(!conf_box) return false;
+    //
+    auto n_bloc = conf_box->get_n_bloc_spin_value(); 
+    auto l_bloc = conf_box->get_l_bloc_spin_value(); 
+    auto n_uid = conf_box->get_n_uid_spin_value(); 
+    //
+    if(n_bloc <= 0){
+        emit error_occured(conf_box, UidErrorMap[UidError::NullNumberBloc]);
+        return true;
+    }
+
+    if(l_bloc <= 0){
+        emit error_occured(conf_box, UidErrorMap[UidError::NullLenghtBloc]);
+        return true;
+    }
+
+    if(n_uid <= 0){
+        emit error_occured(conf_box, UidErrorMap[UidError::NullNumber]);
+        return true ;
+    }
+
+    //Si aucune erreur n'est detecte
+    return false;
+}
+
+void AppControls::on_error_occured(ConfigBox *conf_box, const QString &error){
+    if(!conf_box || error.isEmpty()) return ;
+    conf_box->show_errors(error);
+    conf_box->chang_valid_bt_state(false);
+}
+
+void  AppControls::on_no_error_occured(ConfigBox *conf_box){
+    if(!conf_box) return ;
+    conf_box->hide_errors();
+    conf_box->chang_valid_bt_state(true);
 }

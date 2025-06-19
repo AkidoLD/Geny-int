@@ -6,6 +6,7 @@
 #include "ui/MainWindow.hpp"
 #include "controls/AppControls.hpp"
 #include "model/GenyRand.hpp"
+#include <QListWidget>
 
 using namespace std;
 
@@ -18,6 +19,8 @@ int main(int argc, char* argv[]){
     genyView.setWindowTitle("Geny");
     genyView.resize(720, 940);
     genyView.show();
+    QListWidget list;
+    
     //
     return app.exec();
 }

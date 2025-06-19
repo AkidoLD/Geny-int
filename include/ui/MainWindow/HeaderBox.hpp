@@ -10,6 +10,7 @@ private:
     QGridLayout * glayout;
     QLabel * appName; 
     QLabel * present_msg;
+    static const QString w_style;
     
 //Methodes
 public:

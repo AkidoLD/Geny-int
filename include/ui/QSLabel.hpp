@@ -10,7 +10,6 @@ public :
 protected:
     void mousePressEvent(QMouseEvent *event) override{
         emit slabel_clicked();
-        qDebug() << "Test clique sur label";
         QLabel::mousePressEvent(event);
     }
 

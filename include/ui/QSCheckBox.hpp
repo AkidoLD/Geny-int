@@ -9,6 +9,7 @@ public:
 
 public slots:
     void nextCheckState() override{
-        setChecked(!checkState());
+        if(this->isEnabled())
+            setChecked(!checkState());
     }
 };

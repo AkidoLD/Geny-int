@@ -15,6 +15,10 @@ PasswordPack::PasswordPack(QObject * parent):
     QObject::connect(passwConf, &ConfigBox::generate_bt_clicked, [&](ConfigBox *conf){
         emit generate_bt_clicked(conf, resultBox);
     });
+    //
+    QObject::connect(passwConf, &ConfigBox::config_change, [&](ConfigBox *conf){
+        emit config_change(conf);
+    });
 }
 
 UidPack::UidPack(QObject * parent):
@@ -32,7 +36,10 @@ UidPack::UidPack(QObject * parent):
     QObject::connect(uidConf, &ConfigBox::generate_bt_clicked, [&](ConfigBox *conf){
         emit generate_bt_clicked(conf, resultBox);
     });
-
+    //
+    QObject::connect(uidConf, &ConfigBox::config_change, [&](ConfigBox *conf){
+        emit config_change(conf);
+    });
 }
 
 PseudoPack::PseudoPack(QObject * parent):
@@ -49,6 +56,10 @@ PseudoPack::PseudoPack(QObject * parent):
     //
     QObject::connect(pseudoConf, &ConfigBox::generate_bt_clicked, [&](ConfigBox *conf){
         emit generate_bt_clicked(conf, resultBox);
+    });
+    //
+    QObject::connect(pseudoConf, &ConfigBox::config_change, [&](ConfigBox *conf){
+        emit config_change(conf);
     });
 }
 
@@ -69,6 +80,8 @@ DashBord::DashBord(QWidget * parent):
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     this->setLayout(glayout);
     this->setContentsMargins(0, 0, 0, 0);
+    this->setStyleSheet(w_style);
+
     //  
     glayout->setObjectName("dashbord-layout");
     glayout->setContentsMargins(0, 0, 0, 0);
@@ -84,15 +97,15 @@ DashBord::DashBord(QWidget * parent):
     //
     switchStackWidget->setObjectName("dashbord-switch-widget");
     switchStackWidget->setLayout(switchStackLayout);
-    switchStackWidget->setFixedWidth(65);
-    switchStackWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    switchStackWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     //
     switchStackLayout->setObjectName("dashbord-switch-layout");
+    switchStackLayout->setContentsMargins(3,30,3,30);
     switchStackLayout->setSpacing(4);
     switchStackLayout->addStretch(1);
-    switchStackLayout->addWidget(passwPack->displayButton);
-    switchStackLayout->addWidget(uidPack->displayButton);
-    switchStackLayout->addWidget(pseudoPack->displayButton);
+    switchStackLayout->addWidget(passwPack->displayButton, 1, Qt::AlignCenter);
+    switchStackLayout->addWidget(uidPack->displayButton, 1, Qt::AlignCenter);
+    switchStackLayout->addWidget(pseudoPack->displayButton, 1, Qt::AlignCenter);
     switchStackLayout->addStretch(1);
     //
     resultStack->setObjectName("dashbord-result-stack");
@@ -100,15 +113,24 @@ DashBord::DashBord(QWidget * parent):
     resultStack->addWidget(passwPack->resultBox);
     resultStack->addWidget(uidPack->resultBox);
     resultStack->addWidget(pseudoPack->resultBox);
-    //
-    QObject::connect(passwPack, &PasswordPack::display_bt_clicked, this, &DashBord::on_display_bt_clicked);
-    QObject::connect(uidPack, &UidPack::display_bt_clicked, this, &DashBord::on_display_bt_clicked);
-    QObject::connect(pseudoPack, &PseudoPack::display_bt_clicked, this, &DashBord::on_display_bt_clicked);
-    //
+    
+    //Signal emit lorsque le bouton de generation est clicke
     QObject::connect(passwPack, &PasswordPack::generate_bt_clicked, this, &DashBord::on_generate_signal_emit);
     QObject::connect(uidPack, &UidPack::generate_bt_clicked, this, &DashBord::on_generate_signal_emit);
     QObject::connect(pseudoPack, &PseudoPack::generate_bt_clicked, this, &DashBord::on_generate_signal_emit);
+    
+    //Signal emit lorsque le bouton d'affichage est clique
+    QObject::connect(passwPack, &PasswordPack::display_bt_clicked, this, &DashBord::on_display_bt_clicked);
+    QObject::connect(uidPack, &UidPack::display_bt_clicked, this, &DashBord::on_display_bt_clicked);
+    QObject::connect(pseudoPack, &PseudoPack::display_bt_clicked, this, &DashBord::on_display_bt_clicked);
+    
+    //Signal emit lors que une configuration est modifier sur le dashbord
+    QObject::connect(passwPack, &PasswordPack::config_change, this, &DashBord::on_change_config);
+    QObject::connect(uidPack, &UidPack::config_change, this, &DashBord::on_change_config);
+    QObject::connect(pseudoPack, &PseudoPack::config_change, this, &DashBord::on_change_config);
 }
+
+
 
 void DashBord::on_display_bt_clicked(ConfigBox *config, ResultBox *result){
     configsStack->setCurrentWidget(config);
@@ -117,6 +139,54 @@ void DashBord::on_display_bt_clicked(ConfigBox *config, ResultBox *result){
 
 void DashBord::on_generate_signal_emit(ConfigBox *conf, ResultBox *result){
     if(!conf || !result) return;
-    qDebug() << ";laksdkasd;aks dlkasd lkk;l";
     emit generate_bt_clicked(conf, result);
 }
+
+void DashBord::on_change_config(ConfigBox *conf_box){
+    if(!conf_box) return ;
+    qDebug() << "Changement effectue depuis dashbord";
+    emit config_change(conf_box);
+}
+
+const QString DashBord::w_style{R"(
+        #dashbord {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #dashbord-layout{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #dashbord-config-stack{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #dashbord-switch-widget{
+            margin: 0px;
+            padding: 5px;
+            background-color: white;
+            border-radius: 15px;
+            border: 2px solid rgb(0, 0, 0);
+        }
+        
+        #dashbord-switch-widget > QPushButton{
+            background-color: rgb(235, 235, 235);
+            border: 2px solid black;
+            border-radius: 8px;
+            color: black;
+        }
+
+        #dashbord-switch-layout{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #dashbord-result-stack{
+            margin: 0px;
+            padding: 0px;
+        }
+    )"
+};

@@ -15,9 +15,6 @@ PasswConfig::PasswConfig(QWidget * parent):
     number_spin->setMaximum(9999);
     lenght_spin->setMaximum(9999);
     //
-    number_spin->setMinimum(1);
-    lenght_spin->setMinimum(1);
-    //
     number_spin->setValue(10);
     lenght_spin->setValue(10);
     
@@ -51,6 +48,15 @@ PasswConfig::PasswConfig(QWidget * parent):
     //
     configs_grid->addWidget(wdb_char_label, 4, 4, 1, 3, Qt::AlignLeft);
     configs_grid->addWidget(wdb_char_check, 4, 7, 1, 1, Qt::AlignRight);
+
+    //Connection des signaux de verification
+    QObject::connect(lenght_spin, &QSpinBox::valueChanged, [&](){
+        emit config_change(this);
+    });
+
+    QObject::connect(number_spin, &QSpinBox::valueChanged, [&](){
+        emit config_change(this);
+    });
 
 }
 

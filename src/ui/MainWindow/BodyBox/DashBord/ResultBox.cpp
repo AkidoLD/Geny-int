@@ -10,6 +10,7 @@ ResultBox::ResultBox(const QString &result_title_text,QWidget * parent):
     this->setObjectName("result-box");
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     this->setLayout(vlayout);
+    this->setStyleSheet(w_style);
     //
     vlayout->setObjectName("result-box-layout");
     vlayout->addWidget(result_title, 0, Qt::AlignLeft | Qt::AlignTop);
@@ -34,3 +35,30 @@ void ResultBox::display_token_list(const QStringList &gen_tokens){
     result_list->clear();
     result_list->addItems(gen_tokens);
 }
+
+const QString ResultBox::w_style{R"(
+
+        #result-box #result-box-title{
+            color: black;
+            font-size: 20pt;
+            margin: 0 30px;
+            font-family: 'URW Gothic';
+            font-weight: 700;
+        }
+
+        #result-box-list{
+            color: black;
+            font-size: 14pt;
+            font-family: 'Andale Mono';
+            font-weight: 700;
+            background-color: white;
+            border: 2px solid black;
+        }
+
+        #result-box-list QListWidgetItem{
+            margin: 4px 0;
+            border: 1px solid black;
+        }
+        
+    )"
+};
