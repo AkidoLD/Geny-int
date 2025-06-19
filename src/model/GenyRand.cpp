@@ -83,7 +83,7 @@ string GenyRand::generate_secure_passw(
     string gen_passw = "";
 
     while(gen_passw.length() < lenght){
-        auto n_gen = homogen ? homo_coef : generate_rand_num(lenght - gen_passw.size(), 1);
+        auto n_gen = homogen ? homo_coef : generate_rand_num(homo_coef, 1);
         gen_passw += random_geny(generators, n_gen , wdb_chars);
     }
     gen_passw.resize(lenght);

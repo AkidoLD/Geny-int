@@ -39,6 +39,7 @@ enum class PseudoError{
     NullMaxLenght,
     NullMinLenght,
     MaxLessThanMin,
+    MinLessThanSample,
     SampleRequired  
 };
 

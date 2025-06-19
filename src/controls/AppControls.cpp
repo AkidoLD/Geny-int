@@ -20,6 +20,7 @@ const QMap<PseudoError, QString> AppControls::PseudoErrorMap{
     {PseudoError::MaxLessThanMin, "La taille maximale est inferieur a la minimale"},
     {PseudoError::NullMaxLenght, "La taille maximale ne peux pas etre null"},
     {PseudoError::NullMinLenght, "La taille minimale ne peux pas etre null"},
+    {PseudoError::MinLessThanSample, "La taille minimal inferieur a celle de l'echantillons"},
     {PseudoError::NullNumber, "Le nombre de pseudo genere ne peux pas etre null"},
     {PseudoError::SampleRequired, "Un echantillons est requis pour la generation"}
 };
@@ -277,6 +278,11 @@ bool AppControls::verify_pseudo_conf(PseudoConfig *conf_box){
     //
     if(l_pseudo_max < l_pseudo_min){
         emit error_occured(conf_box, PseudoErrorMap[PseudoError::MaxLessThanMin]);
+        return true;
+    }
+    //
+    if(r_sample && l_pseudo_min < (size_t) sample.length()){
+        emit error_occured(conf_box, PseudoErrorMap[PseudoError::MinLessThanSample]);
         return true;
     }
     //
