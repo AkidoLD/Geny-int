@@ -16,7 +16,6 @@ int main(int argc, char* argv[]){
     //
     AppControls genyControl(&genyView, &genyModel);
     genyView.setWindowTitle("Geny");
-    genyView.resize(720, 940);
     genyView.show();    
     //
     return app.exec();

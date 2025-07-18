@@ -1,0 +1,131 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-RelWithDebInfo-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				},
+				{
+					"build" : "lib/RandomUtils",
+					"jsonFile" : "directory-lib.RandomUtils-RelWithDebInfo-84e1281a83ba675cc915.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "lib/RandomUtils",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "lib/WordBase",
+					"jsonFile" : "directory-lib.WordBase-RelWithDebInfo-ac90ea0f1b66037290d4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "lib/WordBase",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "Geny",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Geny-int::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Geny-int-RelWithDebInfo-8cb23433d5ff03b9cb28.json",
+					"name" : "Geny-int",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Geny-int_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Geny-int_autogen-RelWithDebInfo-6fdf25522d35c0adf49f.json",
+					"name" : "Geny-int_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Geny-int_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Geny-int_autogen_timestamp_deps-RelWithDebInfo-5716f960e68d4b3e5929.json",
+					"name" : "Geny-int_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "RandomUtils::@32c178867b9eaa31c015",
+					"jsonFile" : "target-RandomUtils-RelWithDebInfo-c300064d081538c9808b.json",
+					"name" : "RandomUtils",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "WordBase::@0f0a90cadcb2e7daa4c3",
+					"jsonFile" : "target-WordBase-RelWithDebInfo-c2e1c4521edf28caf9db.json",
+					"name" : "WordBase",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/akido-ld/Documents/Code Project/Projets C++/Geny Project/build",
+		"source" : "/home/akido-ld/Documents/Code Project/Projets C++/Geny Project"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

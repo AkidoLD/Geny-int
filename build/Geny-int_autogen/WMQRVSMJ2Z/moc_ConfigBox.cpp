@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'ConfigBox.hpp'
 **
-** Created by: The Qt Meta Object Compiler version 68 (Qt 6.6.2)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.8.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -10,19 +10,16 @@
 #include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
-#if __has_include(<QtCore/qtmochelpers.h>)
 #include <QtCore/qtmochelpers.h>
-#else
-QT_BEGIN_MOC_NAMESPACE
-#endif
-
 
 #include <memory>
 
+
+#include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'ConfigBox.hpp' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
-#error "This file was generated using the moc from 6.6.2. It"
+#error "This file was generated using the moc from 6.8.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -35,46 +32,23 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
+struct qt_meta_tag_ZN9ConfigBoxE_t {};
+} // unnamed namespace
+
 
 #ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSConfigBoxENDCLASS_t {};
-constexpr auto qt_meta_stringdata_CLASSConfigBoxENDCLASS = QtMocHelpers::stringData(
+static constexpr auto qt_meta_stringdata_ZN9ConfigBoxE = QtMocHelpers::stringData(
     "ConfigBox",
     "generate_bt_clicked",
     "",
     "ConfigBox*",
     "config_change"
 );
-#else  // !QT_MOC_HAS_STRING_DATA
-struct qt_meta_stringdata_CLASSConfigBoxENDCLASS_t {
-    uint offsetsAndSizes[10];
-    char stringdata0[10];
-    char stringdata1[20];
-    char stringdata2[1];
-    char stringdata3[11];
-    char stringdata4[14];
-};
-#define QT_MOC_LITERAL(ofs, len) \
-    uint(sizeof(qt_meta_stringdata_CLASSConfigBoxENDCLASS_t::offsetsAndSizes) + ofs), len 
-Q_CONSTINIT static const qt_meta_stringdata_CLASSConfigBoxENDCLASS_t qt_meta_stringdata_CLASSConfigBoxENDCLASS = {
-    {
-        QT_MOC_LITERAL(0, 9),  // "ConfigBox"
-        QT_MOC_LITERAL(10, 19),  // "generate_bt_clicked"
-        QT_MOC_LITERAL(30, 0),  // ""
-        QT_MOC_LITERAL(31, 10),  // "ConfigBox*"
-        QT_MOC_LITERAL(42, 13)   // "config_change"
-    },
-    "ConfigBox",
-    "generate_bt_clicked",
-    "",
-    "ConfigBox*",
-    "config_change"
-};
-#undef QT_MOC_LITERAL
-#endif // !QT_MOC_HAS_STRING_DATA
-} // unnamed namespace
+#else  // !QT_MOC_HAS_STRINGDATA
+#error "qtmochelpers.h not found or too old."
+#endif // !QT_MOC_HAS_STRINGDATA
 
-Q_CONSTINIT static const uint qt_meta_data_CLASSConfigBoxENDCLASS[] = {
+Q_CONSTINIT static const uint qt_meta_data_ZN9ConfigBoxE[] = {
 
  // content:
       12,       // revision
@@ -100,11 +74,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSConfigBoxENDCLASS[] = {
 
 Q_CONSTINIT const QMetaObject ConfigBox::staticMetaObject = { {
     QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_meta_stringdata_CLASSConfigBoxENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSConfigBoxENDCLASS,
+    qt_meta_stringdata_ZN9ConfigBoxE.offsetsAndSizes,
+    qt_meta_data_ZN9ConfigBoxE,
     qt_static_metacall,
     nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSConfigBoxENDCLASS_t,
+    qt_incomplete_metaTypeArray<qt_meta_tag_ZN9ConfigBoxE_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<ConfigBox, std::true_type>,
         // method 'generate_bt_clicked'
@@ -119,15 +93,15 @@ Q_CONSTINIT const QMetaObject ConfigBox::staticMetaObject = { {
 
 void ConfigBox::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
+    auto *_t = static_cast<ConfigBox *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<ConfigBox *>(_o);
-        (void)_t;
         switch (_id) {
         case 0: _t->generate_bt_clicked((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1]))); break;
         case 1: _t->config_change((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1]))); break;
         default: ;
         }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
         case 0:
@@ -145,18 +119,19 @@ void ConfigBox::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             }
             break;
         }
-    } else if (_c == QMetaObject::IndexOfMethod) {
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (ConfigBox::*)(ConfigBox * );
-            if (_t _q_method = &ConfigBox::generate_bt_clicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (ConfigBox::*)(ConfigBox * );
+            if (_q_method_type _q_method = &ConfigBox::generate_bt_clicked; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (ConfigBox::*)(ConfigBox * );
-            if (_t _q_method = &ConfigBox::config_change; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (ConfigBox::*)(ConfigBox * );
+            if (_q_method_type _q_method = &ConfigBox::config_change; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
             }
@@ -172,7 +147,7 @@ const QMetaObject *ConfigBox::metaObject() const
 void *ConfigBox::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_CLASSConfigBoxENDCLASS.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_ZN9ConfigBoxE.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
@@ -186,7 +161,8 @@ int ConfigBox::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 2;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 2;

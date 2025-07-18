@@ -53,7 +53,7 @@ string const GenyRand::random_geny(const vector<generator> &gen_list, size_t gch
     if(gchar_l <= 0)
         throw invalid_argument("Le nombre de char genere ne peut etre null");
     //Choisir le generateur a utiliser
-    if(wdb_char && !generate_rand_num(gen_list.size()))
+    if(wdb_char && !generate_rand_num(gen_list.size()) - 1)
         return get_rand_str(gchar_l);
     //
     const auto _generator = gen_list[generate_rand_num(gen_list.size() - 1)];

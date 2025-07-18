@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'DashBord.hpp'
 **
-** Created by: The Qt Meta Object Compiler version 68 (Qt 6.6.2)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.8.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -10,19 +10,16 @@
 #include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
-#if __has_include(<QtCore/qtmochelpers.h>)
 #include <QtCore/qtmochelpers.h>
-#else
-QT_BEGIN_MOC_NAMESPACE
-#endif
-
 
 #include <memory>
 
+
+#include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'DashBord.hpp' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
-#error "This file was generated using the moc from 6.6.2. It"
+#error "This file was generated using the moc from 6.8.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -35,10 +32,12 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
+struct qt_meta_tag_ZN12PasswordPackE_t {};
+} // unnamed namespace
+
 
 #ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSPasswordPackENDCLASS_t {};
-constexpr auto qt_meta_stringdata_CLASSPasswordPackENDCLASS = QtMocHelpers::stringData(
+static constexpr auto qt_meta_stringdata_ZN12PasswordPackE = QtMocHelpers::stringData(
     "PasswordPack",
     "display_bt_clicked",
     "",
@@ -47,42 +46,11 @@ constexpr auto qt_meta_stringdata_CLASSPasswordPackENDCLASS = QtMocHelpers::stri
     "generate_bt_clicked",
     "config_change"
 );
-#else  // !QT_MOC_HAS_STRING_DATA
-struct qt_meta_stringdata_CLASSPasswordPackENDCLASS_t {
-    uint offsetsAndSizes[14];
-    char stringdata0[13];
-    char stringdata1[19];
-    char stringdata2[1];
-    char stringdata3[11];
-    char stringdata4[11];
-    char stringdata5[20];
-    char stringdata6[14];
-};
-#define QT_MOC_LITERAL(ofs, len) \
-    uint(sizeof(qt_meta_stringdata_CLASSPasswordPackENDCLASS_t::offsetsAndSizes) + ofs), len 
-Q_CONSTINIT static const qt_meta_stringdata_CLASSPasswordPackENDCLASS_t qt_meta_stringdata_CLASSPasswordPackENDCLASS = {
-    {
-        QT_MOC_LITERAL(0, 12),  // "PasswordPack"
-        QT_MOC_LITERAL(13, 18),  // "display_bt_clicked"
-        QT_MOC_LITERAL(32, 0),  // ""
-        QT_MOC_LITERAL(33, 10),  // "ConfigBox*"
-        QT_MOC_LITERAL(44, 10),  // "ResultBox*"
-        QT_MOC_LITERAL(55, 19),  // "generate_bt_clicked"
-        QT_MOC_LITERAL(75, 13)   // "config_change"
-    },
-    "PasswordPack",
-    "display_bt_clicked",
-    "",
-    "ConfigBox*",
-    "ResultBox*",
-    "generate_bt_clicked",
-    "config_change"
-};
-#undef QT_MOC_LITERAL
-#endif // !QT_MOC_HAS_STRING_DATA
-} // unnamed namespace
+#else  // !QT_MOC_HAS_STRINGDATA
+#error "qtmochelpers.h not found or too old."
+#endif // !QT_MOC_HAS_STRINGDATA
 
-Q_CONSTINIT static const uint qt_meta_data_CLASSPasswordPackENDCLASS[] = {
+Q_CONSTINIT static const uint qt_meta_data_ZN12PasswordPackE[] = {
 
  // content:
       12,       // revision
@@ -110,11 +78,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSPasswordPackENDCLASS[] = {
 
 Q_CONSTINIT const QMetaObject PasswordPack::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_CLASSPasswordPackENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSPasswordPackENDCLASS,
+    qt_meta_stringdata_ZN12PasswordPackE.offsetsAndSizes,
+    qt_meta_data_ZN12PasswordPackE,
     qt_static_metacall,
     nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSPasswordPackENDCLASS_t,
+    qt_incomplete_metaTypeArray<qt_meta_tag_ZN12PasswordPackE_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<PasswordPack, std::true_type>,
         // method 'display_bt_clicked'
@@ -134,16 +102,16 @@ Q_CONSTINIT const QMetaObject PasswordPack::staticMetaObject = { {
 
 void PasswordPack::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
+    auto *_t = static_cast<PasswordPack *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<PasswordPack *>(_o);
-        (void)_t;
         switch (_id) {
         case 0: _t->display_bt_clicked((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<ResultBox*>>(_a[2]))); break;
         case 1: _t->generate_bt_clicked((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<ResultBox*>>(_a[2]))); break;
         case 2: _t->config_change((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1]))); break;
         default: ;
         }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
         case 0:
@@ -172,25 +140,26 @@ void PasswordPack::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             }
             break;
         }
-    } else if (_c == QMetaObject::IndexOfMethod) {
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (PasswordPack::*)(ConfigBox * , ResultBox * );
-            if (_t _q_method = &PasswordPack::display_bt_clicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (PasswordPack::*)(ConfigBox * , ResultBox * );
+            if (_q_method_type _q_method = &PasswordPack::display_bt_clicked; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (PasswordPack::*)(ConfigBox * , ResultBox * );
-            if (_t _q_method = &PasswordPack::generate_bt_clicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (PasswordPack::*)(ConfigBox * , ResultBox * );
+            if (_q_method_type _q_method = &PasswordPack::generate_bt_clicked; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
             }
         }
         {
-            using _t = void (PasswordPack::*)(ConfigBox * );
-            if (_t _q_method = &PasswordPack::config_change; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (PasswordPack::*)(ConfigBox * );
+            if (_q_method_type _q_method = &PasswordPack::config_change; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 2;
                 return;
             }
@@ -206,7 +175,7 @@ const QMetaObject *PasswordPack::metaObject() const
 void *PasswordPack::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_CLASSPasswordPackENDCLASS.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_ZN12PasswordPackE.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
@@ -220,7 +189,8 @@ int PasswordPack::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 3;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 3;
@@ -249,10 +219,12 @@ void PasswordPack::config_change(ConfigBox * _t1)
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 namespace {
+struct qt_meta_tag_ZN7UidPackE_t {};
+} // unnamed namespace
+
 
 #ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSUidPackENDCLASS_t {};
-constexpr auto qt_meta_stringdata_CLASSUidPackENDCLASS = QtMocHelpers::stringData(
+static constexpr auto qt_meta_stringdata_ZN7UidPackE = QtMocHelpers::stringData(
     "UidPack",
     "display_bt_clicked",
     "",
@@ -261,42 +233,11 @@ constexpr auto qt_meta_stringdata_CLASSUidPackENDCLASS = QtMocHelpers::stringDat
     "generate_bt_clicked",
     "config_change"
 );
-#else  // !QT_MOC_HAS_STRING_DATA
-struct qt_meta_stringdata_CLASSUidPackENDCLASS_t {
-    uint offsetsAndSizes[14];
-    char stringdata0[8];
-    char stringdata1[19];
-    char stringdata2[1];
-    char stringdata3[11];
-    char stringdata4[11];
-    char stringdata5[20];
-    char stringdata6[14];
-};
-#define QT_MOC_LITERAL(ofs, len) \
-    uint(sizeof(qt_meta_stringdata_CLASSUidPackENDCLASS_t::offsetsAndSizes) + ofs), len 
-Q_CONSTINIT static const qt_meta_stringdata_CLASSUidPackENDCLASS_t qt_meta_stringdata_CLASSUidPackENDCLASS = {
-    {
-        QT_MOC_LITERAL(0, 7),  // "UidPack"
-        QT_MOC_LITERAL(8, 18),  // "display_bt_clicked"
-        QT_MOC_LITERAL(27, 0),  // ""
-        QT_MOC_LITERAL(28, 10),  // "ConfigBox*"
-        QT_MOC_LITERAL(39, 10),  // "ResultBox*"
-        QT_MOC_LITERAL(50, 19),  // "generate_bt_clicked"
-        QT_MOC_LITERAL(70, 13)   // "config_change"
-    },
-    "UidPack",
-    "display_bt_clicked",
-    "",
-    "ConfigBox*",
-    "ResultBox*",
-    "generate_bt_clicked",
-    "config_change"
-};
-#undef QT_MOC_LITERAL
-#endif // !QT_MOC_HAS_STRING_DATA
-} // unnamed namespace
+#else  // !QT_MOC_HAS_STRINGDATA
+#error "qtmochelpers.h not found or too old."
+#endif // !QT_MOC_HAS_STRINGDATA
 
-Q_CONSTINIT static const uint qt_meta_data_CLASSUidPackENDCLASS[] = {
+Q_CONSTINIT static const uint qt_meta_data_ZN7UidPackE[] = {
 
  // content:
       12,       // revision
@@ -324,11 +265,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSUidPackENDCLASS[] = {
 
 Q_CONSTINIT const QMetaObject UidPack::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_CLASSUidPackENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSUidPackENDCLASS,
+    qt_meta_stringdata_ZN7UidPackE.offsetsAndSizes,
+    qt_meta_data_ZN7UidPackE,
     qt_static_metacall,
     nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSUidPackENDCLASS_t,
+    qt_incomplete_metaTypeArray<qt_meta_tag_ZN7UidPackE_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<UidPack, std::true_type>,
         // method 'display_bt_clicked'
@@ -348,16 +289,16 @@ Q_CONSTINIT const QMetaObject UidPack::staticMetaObject = { {
 
 void UidPack::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
+    auto *_t = static_cast<UidPack *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<UidPack *>(_o);
-        (void)_t;
         switch (_id) {
         case 0: _t->display_bt_clicked((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<ResultBox*>>(_a[2]))); break;
         case 1: _t->generate_bt_clicked((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<ResultBox*>>(_a[2]))); break;
         case 2: _t->config_change((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1]))); break;
         default: ;
         }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
         case 0:
@@ -386,25 +327,26 @@ void UidPack::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
             }
             break;
         }
-    } else if (_c == QMetaObject::IndexOfMethod) {
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (UidPack::*)(ConfigBox * , ResultBox * );
-            if (_t _q_method = &UidPack::display_bt_clicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (UidPack::*)(ConfigBox * , ResultBox * );
+            if (_q_method_type _q_method = &UidPack::display_bt_clicked; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (UidPack::*)(ConfigBox * , ResultBox * );
-            if (_t _q_method = &UidPack::generate_bt_clicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (UidPack::*)(ConfigBox * , ResultBox * );
+            if (_q_method_type _q_method = &UidPack::generate_bt_clicked; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
             }
         }
         {
-            using _t = void (UidPack::*)(ConfigBox * );
-            if (_t _q_method = &UidPack::config_change; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (UidPack::*)(ConfigBox * );
+            if (_q_method_type _q_method = &UidPack::config_change; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 2;
                 return;
             }
@@ -420,7 +362,7 @@ const QMetaObject *UidPack::metaObject() const
 void *UidPack::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_CLASSUidPackENDCLASS.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_ZN7UidPackE.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
@@ -434,7 +376,8 @@ int UidPack::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 3;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 3;
@@ -463,10 +406,12 @@ void UidPack::config_change(ConfigBox * _t1)
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 namespace {
+struct qt_meta_tag_ZN10PseudoPackE_t {};
+} // unnamed namespace
+
 
 #ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSPseudoPackENDCLASS_t {};
-constexpr auto qt_meta_stringdata_CLASSPseudoPackENDCLASS = QtMocHelpers::stringData(
+static constexpr auto qt_meta_stringdata_ZN10PseudoPackE = QtMocHelpers::stringData(
     "PseudoPack",
     "display_bt_clicked",
     "",
@@ -475,42 +420,11 @@ constexpr auto qt_meta_stringdata_CLASSPseudoPackENDCLASS = QtMocHelpers::string
     "generate_bt_clicked",
     "config_change"
 );
-#else  // !QT_MOC_HAS_STRING_DATA
-struct qt_meta_stringdata_CLASSPseudoPackENDCLASS_t {
-    uint offsetsAndSizes[14];
-    char stringdata0[11];
-    char stringdata1[19];
-    char stringdata2[1];
-    char stringdata3[11];
-    char stringdata4[11];
-    char stringdata5[20];
-    char stringdata6[14];
-};
-#define QT_MOC_LITERAL(ofs, len) \
-    uint(sizeof(qt_meta_stringdata_CLASSPseudoPackENDCLASS_t::offsetsAndSizes) + ofs), len 
-Q_CONSTINIT static const qt_meta_stringdata_CLASSPseudoPackENDCLASS_t qt_meta_stringdata_CLASSPseudoPackENDCLASS = {
-    {
-        QT_MOC_LITERAL(0, 10),  // "PseudoPack"
-        QT_MOC_LITERAL(11, 18),  // "display_bt_clicked"
-        QT_MOC_LITERAL(30, 0),  // ""
-        QT_MOC_LITERAL(31, 10),  // "ConfigBox*"
-        QT_MOC_LITERAL(42, 10),  // "ResultBox*"
-        QT_MOC_LITERAL(53, 19),  // "generate_bt_clicked"
-        QT_MOC_LITERAL(73, 13)   // "config_change"
-    },
-    "PseudoPack",
-    "display_bt_clicked",
-    "",
-    "ConfigBox*",
-    "ResultBox*",
-    "generate_bt_clicked",
-    "config_change"
-};
-#undef QT_MOC_LITERAL
-#endif // !QT_MOC_HAS_STRING_DATA
-} // unnamed namespace
+#else  // !QT_MOC_HAS_STRINGDATA
+#error "qtmochelpers.h not found or too old."
+#endif // !QT_MOC_HAS_STRINGDATA
 
-Q_CONSTINIT static const uint qt_meta_data_CLASSPseudoPackENDCLASS[] = {
+Q_CONSTINIT static const uint qt_meta_data_ZN10PseudoPackE[] = {
 
  // content:
       12,       // revision
@@ -538,11 +452,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSPseudoPackENDCLASS[] = {
 
 Q_CONSTINIT const QMetaObject PseudoPack::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_CLASSPseudoPackENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSPseudoPackENDCLASS,
+    qt_meta_stringdata_ZN10PseudoPackE.offsetsAndSizes,
+    qt_meta_data_ZN10PseudoPackE,
     qt_static_metacall,
     nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSPseudoPackENDCLASS_t,
+    qt_incomplete_metaTypeArray<qt_meta_tag_ZN10PseudoPackE_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<PseudoPack, std::true_type>,
         // method 'display_bt_clicked'
@@ -562,16 +476,16 @@ Q_CONSTINIT const QMetaObject PseudoPack::staticMetaObject = { {
 
 void PseudoPack::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
+    auto *_t = static_cast<PseudoPack *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<PseudoPack *>(_o);
-        (void)_t;
         switch (_id) {
         case 0: _t->display_bt_clicked((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<ResultBox*>>(_a[2]))); break;
         case 1: _t->generate_bt_clicked((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<ResultBox*>>(_a[2]))); break;
         case 2: _t->config_change((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1]))); break;
         default: ;
         }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
         case 0:
@@ -600,25 +514,26 @@ void PseudoPack::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             }
             break;
         }
-    } else if (_c == QMetaObject::IndexOfMethod) {
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (PseudoPack::*)(ConfigBox * , ResultBox * );
-            if (_t _q_method = &PseudoPack::display_bt_clicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (PseudoPack::*)(ConfigBox * , ResultBox * );
+            if (_q_method_type _q_method = &PseudoPack::display_bt_clicked; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (PseudoPack::*)(ConfigBox * , ResultBox * );
-            if (_t _q_method = &PseudoPack::generate_bt_clicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (PseudoPack::*)(ConfigBox * , ResultBox * );
+            if (_q_method_type _q_method = &PseudoPack::generate_bt_clicked; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
             }
         }
         {
-            using _t = void (PseudoPack::*)(ConfigBox * );
-            if (_t _q_method = &PseudoPack::config_change; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (PseudoPack::*)(ConfigBox * );
+            if (_q_method_type _q_method = &PseudoPack::config_change; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 2;
                 return;
             }
@@ -634,7 +549,7 @@ const QMetaObject *PseudoPack::metaObject() const
 void *PseudoPack::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_CLASSPseudoPackENDCLASS.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_ZN10PseudoPackE.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
@@ -648,7 +563,8 @@ int PseudoPack::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 3;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 3;
@@ -677,10 +593,12 @@ void PseudoPack::config_change(ConfigBox * _t1)
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 namespace {
+struct qt_meta_tag_ZN8DashBordE_t {};
+} // unnamed namespace
+
 
 #ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSDashBordENDCLASS_t {};
-constexpr auto qt_meta_stringdata_CLASSDashBordENDCLASS = QtMocHelpers::stringData(
+static constexpr auto qt_meta_stringdata_ZN8DashBordE = QtMocHelpers::stringData(
     "DashBord",
     "generate_bt_clicked",
     "",
@@ -691,48 +609,11 @@ constexpr auto qt_meta_stringdata_CLASSDashBordENDCLASS = QtMocHelpers::stringDa
     "on_generate_signal_emit",
     "on_change_config"
 );
-#else  // !QT_MOC_HAS_STRING_DATA
-struct qt_meta_stringdata_CLASSDashBordENDCLASS_t {
-    uint offsetsAndSizes[18];
-    char stringdata0[9];
-    char stringdata1[20];
-    char stringdata2[1];
-    char stringdata3[11];
-    char stringdata4[11];
-    char stringdata5[14];
-    char stringdata6[22];
-    char stringdata7[24];
-    char stringdata8[17];
-};
-#define QT_MOC_LITERAL(ofs, len) \
-    uint(sizeof(qt_meta_stringdata_CLASSDashBordENDCLASS_t::offsetsAndSizes) + ofs), len 
-Q_CONSTINIT static const qt_meta_stringdata_CLASSDashBordENDCLASS_t qt_meta_stringdata_CLASSDashBordENDCLASS = {
-    {
-        QT_MOC_LITERAL(0, 8),  // "DashBord"
-        QT_MOC_LITERAL(9, 19),  // "generate_bt_clicked"
-        QT_MOC_LITERAL(29, 0),  // ""
-        QT_MOC_LITERAL(30, 10),  // "ConfigBox*"
-        QT_MOC_LITERAL(41, 10),  // "ResultBox*"
-        QT_MOC_LITERAL(52, 13),  // "config_change"
-        QT_MOC_LITERAL(66, 21),  // "on_display_bt_clicked"
-        QT_MOC_LITERAL(88, 23),  // "on_generate_signal_emit"
-        QT_MOC_LITERAL(112, 16)   // "on_change_config"
-    },
-    "DashBord",
-    "generate_bt_clicked",
-    "",
-    "ConfigBox*",
-    "ResultBox*",
-    "config_change",
-    "on_display_bt_clicked",
-    "on_generate_signal_emit",
-    "on_change_config"
-};
-#undef QT_MOC_LITERAL
-#endif // !QT_MOC_HAS_STRING_DATA
-} // unnamed namespace
+#else  // !QT_MOC_HAS_STRINGDATA
+#error "qtmochelpers.h not found or too old."
+#endif // !QT_MOC_HAS_STRINGDATA
 
-Q_CONSTINIT static const uint qt_meta_data_CLASSDashBordENDCLASS[] = {
+Q_CONSTINIT static const uint qt_meta_data_ZN8DashBordE[] = {
 
  // content:
       12,       // revision
@@ -768,11 +649,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSDashBordENDCLASS[] = {
 
 Q_CONSTINIT const QMetaObject DashBord::staticMetaObject = { {
     QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_meta_stringdata_CLASSDashBordENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSDashBordENDCLASS,
+    qt_meta_stringdata_ZN8DashBordE.offsetsAndSizes,
+    qt_meta_data_ZN8DashBordE,
     qt_static_metacall,
     nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSDashBordENDCLASS_t,
+    qt_incomplete_metaTypeArray<qt_meta_tag_ZN8DashBordE_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<DashBord, std::true_type>,
         // method 'generate_bt_clicked'
@@ -799,9 +680,8 @@ Q_CONSTINIT const QMetaObject DashBord::staticMetaObject = { {
 
 void DashBord::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
+    auto *_t = static_cast<DashBord *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<DashBord *>(_o);
-        (void)_t;
         switch (_id) {
         case 0: _t->generate_bt_clicked((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<ResultBox*>>(_a[2]))); break;
         case 1: _t->config_change((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1]))); break;
@@ -810,7 +690,8 @@ void DashBord::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 4: _t->on_change_config((*reinterpret_cast< std::add_pointer_t<ConfigBox*>>(_a[1]))); break;
         default: ;
         }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
         case 0:
@@ -855,18 +736,19 @@ void DashBord::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
             }
             break;
         }
-    } else if (_c == QMetaObject::IndexOfMethod) {
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (DashBord::*)(ConfigBox * , ResultBox * );
-            if (_t _q_method = &DashBord::generate_bt_clicked; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (DashBord::*)(ConfigBox * , ResultBox * );
+            if (_q_method_type _q_method = &DashBord::generate_bt_clicked; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (DashBord::*)(ConfigBox * );
-            if (_t _q_method = &DashBord::config_change; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            using _q_method_type = void (DashBord::*)(ConfigBox * );
+            if (_q_method_type _q_method = &DashBord::config_change; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
             }
@@ -882,7 +764,7 @@ const QMetaObject *DashBord::metaObject() const
 void *DashBord::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_CLASSDashBordENDCLASS.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_ZN8DashBordE.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
@@ -896,7 +778,8 @@ int DashBord::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 5;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 5;
