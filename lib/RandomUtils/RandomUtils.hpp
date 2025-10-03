@@ -8,11 +8,27 @@
 #include <ctime>
 #include <stdexcept>
 #include <sstream>
+#include <vector>
+#include <chrono>
+#include <thread>
+#include <random>
+#include <algorithm>
+#include <string>
+
 
 using namespace std; 
 
 class Random{
     public : 
+    /**
+     * @brief Vector of special char
+     */
+    static const vector<char>s_char;
+
+    /**
+     * @brief Vector of ponctuation char
+     */
+    static const vector<char> p_char;
     /**
      * @brief Génère un nombre aléatoire entre `_min` et `_max`.
      * @details Cette méthode permet de générer un nombre aléatoire dans l'intervalle fermé [`_min`, `_max`].
@@ -31,7 +47,66 @@ class Random{
      * @param[in] nbr_char Number of char in a String
      * @return `The ID generated`
      */
-    static string get_rand_id(size_t nbr_string = 3, size_t nbr_char = 4); 
+    static string get_rand_id(size_t nbr_string = 3, size_t nbr_char = 4);
+
+    /**
+     * @brief Generate a random letter
+     * @details This function allow to generate a random letter beetween a and z or A and Z
+     * @param[in] upper Say if the generate characte is to `UPPERPCASE`
+     * @return A charactere beetween [A-Z || a-z]
+     */
+    static char gen_rand_letter(bool upper = false);
+
+    /**
+     * @brief Generate a unit number
+     * @details This function allow to generate au number beetween 0 and 9
+     * @return A number beetweeb 0 and 9 
+     */
+    static u_short gen_rand_unit_number();
+
+    /**
+     * @brief Generate a random special char
+     * @details This function allow to generate a random special char
+     *          inignore invisible char like space( ) and tabulation(\t)
+     * @param[in] ponct Say if it can generate pointuation char
+     * @return A special char
+     */
+    static char gen_rand_spe_char(bool ponct = false);
+
+    /**
+     * @brief Return a random value in an array
+     * @details This function take a vector of any type and return a random value
+     * @param[inout] values the vector of values
+     * @return  Random value of this const reference vector
+     */
+    template<class T>
+    static const T &make_rand_choice(const vector<T> &values);
+
+    /**
+     * @brief Randomly joins the words from a vector with an optional separator
+     * @param[in,out] elements The list of words to join. Will be emptied during execution.
+     * @param[in] separator Optional string inserted between each word (default is "")
+     * @return A string made of all input words, randomly ordered and separated
+     * @note This function modifies the input vector by removing elements (no replacement)
+     */
+    static string join_randomly(vector<string>& tokens,  const bool rand_join = true, const string& _sep = "");
+
+    /**
+     * @brief Randomly joins the words from a vector with an optional separator (non-destructive)
+     * @param[in] elements The list of words to join
+     * @param[in] separator Optional string inserted between each word (default is "")
+     * @return A string made of all input words, randomly ordered and separated
+     */
+    static string join_randomly(const vector<string>& tokens, const bool rand_join = true, const string& _sep = "");
+
+    /**
+     * @brief Get randomly true or false
+     * @details When this methods is call, a binary beetween true of false is return
+     * @return True or false
+     */
+    static bool rand_predicat();
+
 };
 
 #endif /* B5E463AA_72D7_4614_91C8_344F26D70A37 */
+

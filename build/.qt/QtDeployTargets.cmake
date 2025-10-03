@@ -1,0 +1,6 @@
+set(__QT_DEPLOY_TARGET_RandomUtils_FILE /home/akido-ld/Documents/Code Project/Projets C++/Geny Project/build/lib/RandomUtils/libRandomUtils.so)
+set(__QT_DEPLOY_TARGET_RandomUtils_TYPE SHARED_LIBRARY)
+set(__QT_DEPLOY_TARGET_WordBase_FILE /home/akido-ld/Documents/Code Project/Projets C++/Geny Project/build/lib/WordBase/libWordBase.so)
+set(__QT_DEPLOY_TARGET_WordBase_TYPE SHARED_LIBRARY)
+set(__QT_DEPLOY_TARGET_Geny-int_FILE /home/akido-ld/Documents/Code Project/Projets C++/Geny Project/build/Geny-int)
+set(__QT_DEPLOY_TARGET_Geny-int_TYPE EXECUTABLE)

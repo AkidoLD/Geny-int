@@ -1,9 +1,22 @@
 #include <iostream>
+#include <QApplication>
+#include <QMainWindow>
+#include <QHBoxLayout>
+#include <QLabel>
+#include "ui/MainWindow.hpp"
+#include "controls/AppControls.hpp"
+#include "model/GenyRand.hpp"
 
 using namespace std;
 
 int main(int argc, char* argv[]){
-    cout << "Hello Geny" << endl;
+    QApplication app (argc, argv);
+    GenyRand genyModel("data/wordbase.dat");
+    MainWindow genyView("Geny-int");
     //
-    return 0;
+    AppControls genyControl(&genyView, &genyModel);
+    genyView.setWindowTitle("Geny");
+    genyView.show();    
+    //
+    return app.exec();
 }
